@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+.env
+*.key
+# Per-install factory state (created by the founder's setup, not part of the template)
+factory/config.json
+factory/factory.json
+factory/versions/

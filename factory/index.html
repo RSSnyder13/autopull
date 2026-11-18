@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Rob · your GTM agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --paper:#f5f6f8; --surface:#ffffff; --surface-2:#f0f2f5; --line:#e2e5ea; --line-soft:#eceef2;
+    --ink:#16191f; --ink-2:#3a404b; --muted:#5f6775; --faint:#8b93a1;
+    --accent:#eb6834; --accent-bg:#fdeee6;
+    /* categorical, fixed order by entity (dataviz reference palette, validated) */
+    --c-extreme:#eb6834; --c-pull:#1baf7a; --c-nopull:#2a78d6; --c-unknown:#a3a9b4;
+    --c-base:#2a78d6; --c-scen:#1baf7a; --c-everyone:#5f6775;
+    --station:#7b8494; --slab:#e7eaef; --belt:#c3c9d3;
+    /* status: reserved, always with icon + label */
+    --good:#1a7f37; --good-bg:#e7f4ea; --bad:#c62828; --bad-bg:#fbe9e9; --warn:#a15c00; --warn-bg:#fdf1e0;
+    --shadow:0 1px 2px rgba(22,25,31,.04), 0 6px 20px rgba(22,25,31,.05);
+    --r:14px;
+    --sans:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper:#0f1115; --surface:#171a20; --surface-2:#1e222a; --line:#2b303a; --line-soft:#242832;
+      --ink:#eceef2; --ink-2:#c9ced8; --muted:#9aa2b1; --faint:#737b89;
+      --accent:#f07a45; --accent-bg:#3a2216;
+      --c-extreme:#d95926; --c-pull:#199e70; --c-nopull:#3987e5; --c-unknown:#6b7280;
+      --c-base:#3987e5; --c-scen:#199e70; --c-everyone:#9aa2b1;
+      --station:#8a93a3; --slab:#232831; --belt:#3d4450;
+      --good:#4cc26e; --good-bg:#16301f; --bad:#ff6b6b; --bad-bg:#3a1b1b; --warn:#f0a840; --warn-bg:#352812;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper:#0f1115; --surface:#171a20; --surface-2:#1e222a; --line:#2b303a; --line-soft:#242832;
+    --ink:#eceef2; --ink-2:#c9ced8; --muted:#9aa2b1; --faint:#737b89;
+    --accent:#f07a45; --accent-bg:#3a2216;
+    --c-extreme:#d95926; --c-pull:#199e70; --c-nopull:#3987e5; --c-unknown:#6b7280;
+    --c-base:#3987e5; --c-scen:#199e70; --c-everyone:#9aa2b1;
+    --station:#8a93a3; --slab:#232831; --belt:#3d4450;
+    --good:#4cc26e; --good-bg:#16301f; --bad:#ff6b6b; --bad-bg:#3a1b1b; --warn:#f0a840; --warn-bg:#352812;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.35);
+  }
+  * { box-sizing:border-box; }
+  [hidden] { display:none !important; }
+  html,body { margin:0; }
+  body { background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:14px; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  button,select,input,textarea { font:inherit; color:inherit; }
+  a { color:inherit; }
+  .wrap { max-width:1240px; margin:0 auto; padding:0 20px 80px; }
+  @media (max-width:560px){ .wrap{ padding:0 16px 80px; } }
+  .eyebrow { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+  .muted { color:var(--muted); } .faint { color:var(--faint); }
+  .num { font-variant-numeric:tabular-nums; }
+  section { margin-top:16px; }
+  h2 { font-size:15px; margin:0 0 4px; font-weight:600; }
+  h3 { font-size:14px; margin:0 0 6px; font-weight:600; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); min-width:0; }
+  .pad { padding:16px 18px; }
+  .row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .spacer { flex:1; }
+  .btn { border:1px solid var(--line); background:var(--surface); border-radius:8px; padding:6px 11px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+  .btn:hover { border-color:var(--faint); }
+  .btn.primary { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .btn.ghost { border-color:transparent; background:none; color:var(--muted); }
+  .btn.sm { padding:3px 8px; font-size:12px; }
+  .btn:disabled { opacity:.5; cursor:default; }
+  .link { border:0; background:none; padding:0; color:var(--muted); text-decoration:underline; text-underline-offset:2px; cursor:pointer; font-size:12px; }
+  .badge { display:inline-flex; align-items:center; gap:5px; font-size:12px; border-radius:999px; padding:3px 9px; border:1px solid var(--line); background:var(--surface); white-space:nowrap; }
+  .badge.warn { color:var(--warn); background:var(--warn-bg); border-color:transparent; cursor:pointer; }
+  .badge.sample { color:var(--accent); border-color:color-mix(in srgb,var(--accent) 40%,transparent); }
+  .chip { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; border-radius:999px; padding:3px 10px; border:1px solid color-mix(in srgb,var(--accent) 45%,transparent); color:var(--accent); background:var(--accent-bg); cursor:pointer; }
+  .pill { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:600; border-radius:999px; padding:1px 7px; }
+  .pill.pass { color:var(--good); background:var(--good-bg); }
+  .pill.miss { color:var(--bad); background:var(--bad-bg); }
+  .pill.unknown { color:var(--warn); background:var(--warn-bg); }
+  .gdot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; flex:none; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th,td { text-align:left; padding:7px 8px; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  th { font-weight:500; color:var(--muted); font-size:12px; }
+  td.r, th.r { text-align:right; }
+  .scrollx { overflow-x:auto; }
+  details summary { cursor:pointer; color:var(--muted); font-size:12px; margin-top:8px; }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--muted); }
+  .legend i { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+  svg text { fill:var(--muted); font-family:var(--sans); font-size:11px; }
+  svg .ink { fill:var(--ink); } svg .ink2 { fill:var(--ink-2); }
+  .seg { display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--surface); }
+  .seg button { border:0; background:transparent; padding:5px 10px; cursor:pointer; color:var(--muted); white-space:nowrap; }
+  .seg button[aria-pressed="true"] { background:var(--surface-2); color:var(--ink); font-weight:600; }
+  select.f, .form input, .form select { border:1px solid var(--line); background:var(--surface); border-radius:8px; padding:5px 8px; max-width:200px; }
+
+  /* header */
+  header.top { position:sticky; top:0; z-index:30; background:color-mix(in srgb,var(--paper) 88%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .bar { max-width:1240px; margin:0 auto; padding:10px 20px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  @media (max-width:560px){ .bar{ padding:10px 16px; } .bar .hide-sm{ display:none; } }
+  .brand { display:flex; align-items:baseline; gap:8px; font-weight:700; font-size:16px; white-space:nowrap; }
+  .brand .dot { width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent); align-self:center; }
+  .brand small { font-weight:500; font-size:12px; color:var(--muted); }
+  .co { color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; font-size:13px; }
+
+  /* setup strip */
+  .setup { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:12px; }
+  @media (max-width:980px){ .setup{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .setup{ grid-template-columns:1fr; } }
+  .step { border:1px solid var(--line); border-radius:12px; padding:12px; background:var(--surface-2); display:flex; flex-direction:column; gap:4px; }
+  .step b { font-size:13px; }
+  .step .s { font-size:12px; color:var(--muted); flex:1; }
+  .step.done { background:var(--good-bg); border-color:transparent; }
+  .step.done b::before { content:"✓ "; color:var(--good); }
+  .step.key { border-color:color-mix(in srgb,var(--accent) 40%,var(--line)); }
+  .progress { height:4px; border-radius:2px; background:var(--surface-2); overflow:hidden; width:120px; }
+  .progress span { display:block; height:100%; background:var(--good); }
+
+  /* goal hero */
+  .hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr); gap:14px 32px; padding:20px 22px 16px; align-items:start; }
+  .hero.one { grid-template-columns:1fr; }
+  @media (max-width:900px){ .hero{ grid-template-columns:1fr; } }
+  .g-head { grid-column:1 / -1; display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; }
+  .g-head strong { font-size:15px; font-weight:600; }
+  .g-left { display:grid; gap:10px; }
+  .tile { border:1px solid var(--line-soft); background:var(--surface-2); border-radius:12px; padding:12px 14px; }
+  .tile .lbl { font-size:12px; color:var(--muted); display:flex; align-items:center; gap:6px; }
+  .tile .lbl i { width:8px; height:8px; border-radius:50%; display:block; }
+  .tile .big { font-size:24px; font-weight:700; letter-spacing:-.02em; line-height:1.2; margin-top:2px; }
+  .tile .big.accent { color:var(--accent); }
+  .tile .sub { font-size:13px; color:var(--ink-2); }
+  .g-stat { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .g-n { font-size:44px; font-weight:700; letter-spacing:-.03em; line-height:1; }
+  .g-of { font-size:15px; color:var(--ink-2); }
+  .g-of b { color:var(--ink); }
+  .g-pct { margin-left:auto; font-size:13px; font-weight:600; color:var(--muted); }
+  .meter { padding:22px 0 20px; }
+  .meter .track { position:relative; height:12px; border-radius:6px; background:var(--surface-2); box-shadow:inset 0 0 0 1px var(--line-soft); }
+  .meter .fill { position:absolute; left:0; top:0; bottom:0; border-radius:6px; background:var(--c-base); }
+  .meter .mk { position:absolute; top:-6px; bottom:-6px; width:2px; margin-left:-1px; border-radius:1px; }
+  .meter .mk em { position:absolute; left:50%; transform:translateX(-50%); font-style:normal; font-size:11px; font-weight:600; white-space:nowrap; }
+  .meter .mk.goal { background:var(--ink); } .meter .mk.goal em { bottom:calc(100% + 3px); color:var(--ink); }
+  .meter .mk.solved { background:var(--accent); } .meter .mk.solved em { top:calc(100% + 3px); color:var(--accent); }
+  .meter .mk.scen { background:var(--c-scen); } .meter .mk.scen em { top:calc(100% + 17px); color:var(--c-scen); }
+  .g-solved { font-size:13px; color:var(--ink-2); }
+  .g-foot { grid-column:1 / -1; display:flex; gap:8px; align-items:baseline; flex-wrap:wrap; padding-top:12px; border-top:1px solid var(--line-soft); font-size:13px; }
+  .g-bn { font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  .g-foot .link { margin-left:auto; font-size:13px; }
+  .goal-form { grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:8px 12px; align-items:end; margin-top:8px; padding:10px; border:1px solid var(--line); border-radius:10px; background:var(--surface-2); }
+  .goal-form label { display:flex; flex-direction:column; gap:3px; font-size:12px; color:var(--muted); }
+  .goal-form input, .goal-form select { border:1px solid var(--line); background:var(--surface); border-radius:8px; padding:5px 8px; width:140px; }
+  .hero-chart svg { display:block; width:100%; height:auto; }
+
+  /* simulate */
+  .sim { padding:12px 14px; display:grid; gap:10px; }
+  .sim form.ask { display:flex; gap:8px; align-items:center; }
+  .sim form.ask input { flex:1; min-width:0; border:1px solid var(--line); border-radius:10px; padding:9px 12px; background:var(--surface-2); }
+  .sim .lead { font-weight:600; white-space:nowrap; display:flex; align-items:center; gap:6px; }
+  .sugs { display:flex; flex-wrap:wrap; gap:6px; }
+  .sugs button { border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:4px 11px; font-size:12px; cursor:pointer; color:var(--ink-2); text-align:left; }
+  .sugs button:hover { border-color:var(--c-scen); }
+  .sugs button.ai::before { content:"✦ "; color:var(--accent); }
+  .sim-result { border-left:3px solid var(--c-scen); padding:6px 12px; background:color-mix(in srgb,var(--c-scen) 7%,transparent); border-radius:0 8px 8px 0; font-size:13px; }
+  .form { display:flex; flex-wrap:wrap; gap:10px 14px; align-items:end; margin:10px 0 0; }
+  .form label { display:flex; flex-direction:column; gap:3px; font-size:12px; color:var(--muted); }
+  .form input[type=number], .form input[type=date] { width:120px; }
+
+  /* right now */
+  .now { position:relative; overflow:hidden; padding:20px 22px 16px 26px; }
+  .now::before { content:""; position:absolute; left:0; top:0; bottom:0; width:6px; background:var(--accent); }
+  .now-title { font-size:22px; font-weight:700; line-height:1.25; letter-spacing:-.01em; margin:8px 0 4px; max-width:60ch; }
+  .now-why { color:var(--ink-2); margin:4px 0 0; max-width:80ch; }
+  .today { display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:start; margin-top:14px; padding:14px 16px; border-radius:12px; background:var(--accent-bg); }
+  .today .tag { font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:600; padding-top:2px; white-space:nowrap; }
+  .today .what { font-size:15px; font-weight:600; color:var(--ink); }
+  .now-toggle { margin-top:12px; }
+  @media (max-width:560px){ .today{ grid-template-columns:1fr; } .now{ padding:16px 16px 14px 20px; } .now-title{ font-size:19px; } .tile .big{ font-size:21px; } .g-n{ font-size:36px; } }
+  .fac-ctl .seg { max-width:100%; overflow-x:auto; scrollbar-width:none; }
+  .now-more { display:grid; grid-template-columns:1fr 1fr; gap:16px 28px; margin-top:14px; padding-top:14px; border-top:1px solid var(--line-soft); }
+  @media (max-width:900px){ .now-more{ grid-template-columns:1fr; } }
+  .now-more p { margin:4px 0 10px; color:var(--ink-2); }
+  .now-more ol { margin:4px 0 0 18px; padding:0; color:var(--ink-2); }
+  .stale { font-size:12px; color:var(--warn); background:var(--warn-bg); border-radius:6px; padding:4px 8px; margin-top:10px; display:inline-block; }
+  .blocks { display:grid; gap:0; margin:6px 0 0; }
+  .block { display:grid; grid-template-columns:118px 14px 1fr; gap:8px; align-items:start; padding:6px 0; }
+  .block .t { font-family:var(--mono); font-size:12px; color:var(--muted); padding-top:2px; }
+  .block .d { width:10px; height:10px; border-radius:50%; border:2px solid var(--faint); margin-top:5px; }
+  .block.bn .d { border-color:var(--accent); background:var(--accent); }
+  .block .w { font-size:12px; color:var(--muted); }
+  .tasks { display:grid; gap:2px; margin-top:6px; }
+  .task { display:grid; grid-template-columns:22px 1fr; gap:4px 8px; padding:7px 0; border-bottom:1px solid var(--line-soft); }
+  .task:last-child { border-bottom:0; }
+  .task input { width:16px; height:16px; margin:2px 0 0; accent-color:var(--good); cursor:pointer; }
+  .task .tt { font-weight:500; }
+  .task.done .tt { text-decoration:line-through; color:var(--faint); }
+  .task .meta { grid-column:2; font-size:12px; color:var(--muted); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .src { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; border-radius:4px; padding:0 5px; border:1px solid var(--line); }
+  .src.bn { color:var(--accent); border-color:color-mix(in srgb,var(--accent) 45%,transparent); }
+  .src.dr { color:var(--c-nopull); border-color:color-mix(in srgb,var(--c-nopull) 45%,transparent); }
+
+  /* scorecard */
+  .sec-head { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:24px 0 8px; }
+  .sec-head h2 { font-size:17px; margin:0; }
+  .stdgrid { display:grid; grid-template-columns:1fr 1fr 3fr 1fr; gap:10px; }
+  @media (max-width:980px){ .stdgrid{ grid-template-columns:1fr 1fr; } .stdgrid .g-sales{ grid-column:1 / -1; } }
+  @media (max-width:520px){ .stdgrid{ grid-template-columns:1fr; } }
+  .grp { display:flex; flex-direction:column; gap:6px; min-width:0; }
+  .grp-h { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+  .grp-h .arrow { color:var(--faint); }
+  .grp-c { display:grid; gap:8px; grid-template-columns:1fr; flex:1; }
+  .g-sales .grp-c { grid-template-columns:repeat(3,1fr); }
+  @media (max-width:520px){ .g-sales .grp-c{ grid-template-columns:1fr; } }
+  .std { padding:12px 14px; cursor:pointer; text-align:left; border:1px solid var(--line); background:var(--surface); border-radius:12px; box-shadow:var(--shadow); width:100%; }
+  .std:hover { border-color:var(--faint); }
+  .std .v { font-size:22px; font-weight:700; margin:2px 0 0; letter-spacing:-.01em; }
+  .std .b { font-size:12px; color:var(--muted); }
+  .std .foot { display:flex; justify-content:space-between; align-items:center; margin-top:6px; }
+  .std .more { font-size:12px; color:var(--faint); }
+  .std.is-bn { outline:2px solid var(--accent); outline-offset:-1px; }
+
+  /* factory */
+  .fac { padding:14px 16px 12px; }
+  .fac-ctl { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .fac-ctl .count { font-size:12px; color:var(--muted); margin-left:auto; }
+  .fac-svg { margin-top:8px; overflow-x:auto; }
+  .fac-svg svg { display:block; width:100%; min-width:760px; height:auto; }
+  .fac-svg .hit { cursor:pointer; }
+  .fac-svg .hit:hover polygon, .fac-svg .hit:focus polygon { filter:brightness(1.08); }
+  .fac-svg .hit:focus { outline:none; }
+  .fac-svg .hit:focus-visible polygon { stroke:var(--ink); stroke-width:1.5; }
+  .belt-run { stroke:var(--surface); stroke-width:2; stroke-dasharray:3 11; fill:none; opacity:.9; animation:run 1.4s linear infinite; }
+  @keyframes run { to { stroke-dashoffset:-14; } }
+  @media (prefers-reduced-motion: reduce){ .belt-run{ animation:none; } }
+  .fac-note { font-size:12px; color:var(--muted); margin-top:6px; }
+
+  /* drawers */
+  .drawer { position:fixed; top:0; right:0; bottom:0; width:min(460px,100vw); background:var(--surface); border-left:1px solid var(--line); box-shadow:var(--shadow); z-index:50; display:flex; flex-direction:column; }
+  .drawer:not(.open) { display:none; }
+  .drawer > header { padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:8px; }
+  .drawer .body { flex:1; overflow:auto; padding:14px 16px 24px; }
+  .msgs { flex:1; overflow:auto; padding:14px 16px; display:flex; flex-direction:column; gap:10px; }
+  .msg { max-width:92%; padding:9px 12px; border-radius:12px; white-space:pre-wrap; font-size:13px; }
+  .msg.me { align-self:flex-end; background:var(--ink); color:var(--paper); }
+  .msg.ai { align-self:flex-start; background:var(--surface-2); }
+  .msg.sys { align-self:center; color:var(--muted); font-size:12px; background:none; }
+  #chat .sugs { padding:0 16px 10px; }
+  .composer { border-top:1px solid var(--line); padding:10px; display:flex; gap:8px; }
+  .composer textarea { flex:1; resize:none; border:1px solid var(--line); border-radius:8px; padding:8px; background:var(--surface); min-height:44px; max-height:140px; }
+  .ins-kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:10px 0 12px; }
+  .ins-kpis div { background:var(--surface-2); border-radius:10px; padding:8px 10px; }
+  .ins-kpis b { display:block; font-size:18px; }
+  .ins-kpis span { font-size:11px; color:var(--muted); }
+  .deal { display:grid; grid-template-columns:1fr auto; gap:2px 8px; padding:8px 0; border-bottom:1px solid var(--line-soft); }
+  .deal .n { display:flex; align-items:center; min-width:0; }
+  .deal .n button { border:0; background:none; padding:0; cursor:pointer; text-align:left; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .deal .m { grid-column:1; font-size:12px; color:var(--muted); }
+  .deal .x { grid-row:1 / span 2; grid-column:2; align-self:center; }
+  .xbtn { border:1px solid var(--line); background:var(--surface); border-radius:6px; width:26px; height:26px; cursor:pointer; color:var(--muted); }
+  .xbtn:hover { color:var(--bad); border-color:var(--bad); }
+  .grp-title { margin:16px 0 4px; font-size:12px; font-weight:600; color:var(--muted); display:flex; gap:6px; align-items:center; }
+  .kv { display:grid; grid-template-columns:104px 1fr; gap:6px 12px; margin:10px 0; font-size:13px; }
+  .kv dt { color:var(--muted); } .kv dd { margin:0; color:var(--ink-2); }
+  .kv dd ul { margin:0; padding-left:16px; } .kv dd li { margin:0 0 2px; }
+  .arch { margin-top:14px; }
+  .doc { background:var(--surface); border:1px solid var(--faint); border-radius:4px; padding:16px 18px 6px; box-shadow:4px 5px 0 color-mix(in srgb,var(--ink) 10%,transparent); }
+  .doc-h { display:flex; gap:10px; align-items:center; }
+  .doc .ava { width:34px; height:34px; border-radius:5px; background:var(--c-extreme); color:#fff; font-weight:700; font-size:13px; display:grid; place-items:center; flex:none; }
+  .doc-t { font-size:22px; font-weight:700; letter-spacing:-.01em; line-height:1.1; }
+  .doc h4 { font-size:17px; margin:16px 0 0; line-height:1.1; }
+  .doc-s { font-size:12px; color:var(--muted); }
+  .doc .kv { grid-template-columns:96px 1fr; }
+  .tag { display:inline-block; font-size:11px; border-radius:999px; padding:1px 8px; border:1px solid var(--line); color:var(--muted); }
+  .tag.repeatable { color:var(--good); border-color:color-mix(in srgb,var(--good) 40%,transparent); }
+  .tag.hypothesis { color:var(--warn); border-color:color-mix(in srgb,var(--warn) 40%,transparent); }
+  .use { display:block; width:100%; text-align:left; border:1px solid var(--line); background:var(--surface); border-radius:10px; padding:10px 12px; margin-top:8px; cursor:pointer; }
+  .use:hover { border-color:var(--faint); }
+  .use b { display:block; font-size:13px; }
+  .use span { font-size:12px; color:var(--muted); }
+  .clean { margin-top:16px; padding:12px; border:1px dashed var(--line); border-radius:10px; font-size:12px; color:var(--muted); }
+
+  #tip { position:fixed; z-index:60; pointer-events:none; background:var(--ink); color:var(--paper); font-size:12px; padding:6px 9px; border-radius:7px; max-width:280px; white-space:pre-line; opacity:0; transition:opacity .08s; }
+  #toast { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); z-index:70; background:var(--ink); color:var(--paper); font-size:13px; padding:8px 14px; border-radius:10px; box-shadow:var(--shadow); max-width:90vw; }
+  .empty { padding:30px; text-align:center; color:var(--muted); }
+  @media (forced-colors: active) { .pill, .badge, .chip { border:1px solid CanvasText; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>AI Rob <small class="hide-sm">your GTM agent</small></div>
+    <div class="co" id="co"></div>
+    <span id="sampleBadge" class="badge sample" hidden>Sample data</span>
+    <button id="dqBadge" class="badge warn" hidden></button>
+    <div class="spacer"></div>
+    <button class="btn ghost hide-sm" id="refreshBtn" title="I re-read your connected tools and rebuild the model">↻ Refresh</button>
+    <button class="btn" id="usesBtn">What can AI Rob do?</button>
+    <button class="btn primary" id="chatBtn">Ask AI Rob</button>
+    <button class="btn ghost" id="themeBtn" aria-label="Toggle theme" title="Toggle theme"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="setup" hidden></section>
+  <section class="card hero" id="hero" aria-label="Your goal"></section>
+  <section class="card sim" id="sim" aria-label="Run a simulation"></section>
+  <section class="card now" id="now" aria-label="Right now"></section>
+  <div class="sec-head"><h2>The scorecard</h2><span class="muted" style="font-size:12px">Six numbers, each with a bar. You pass or you miss. Click one to see the deals behind it.</span></div>
+  <section id="stds" style="margin-top:0"></section>
+  <div class="sec-head"><h2>Your case study factory</h2><span class="muted" style="font-size:12px">Case study goes in. Retained customers come out. Pipeline, sales and delivery sit in between. Click any part to see who is stuck there.</span></div>
+  <section class="card fac" id="factory" style="margin-top:0"></section>
+</main>
+
+<aside class="drawer" id="chat" aria-label="Chat with AI Rob">
+  <header><strong>Ask AI Rob</strong><span class="muted" style="font-size:12px">questions, what-ifs, changes</span><div class="spacer"></div><button class="btn ghost" data-close aria-label="Close">✕</button></header>
+  <div class="msgs" id="msgs"></div>
+  <div class="sugs" id="chatSugs"></div>
+  <form class="composer" id="composer"><textarea id="q" rows="2" placeholder="Ask anything, run a what-if, or tell AI Rob to change something"></textarea><button class="btn primary" id="send">Send</button></form>
+</aside>
+<aside class="drawer" id="inspector" aria-label="Details">
+  <header><strong id="insTitle">Details</strong><div class="spacer"></div><button class="btn ghost" id="insBack" hidden>← Back</button><button class="btn ghost" data-close aria-label="Close">✕</button></header>
+  <div class="body" id="insBody"></div>
+</aside>
+<aside class="drawer" id="uses" aria-label="What AI Rob can do">
+  <header><strong>What can AI Rob do?</strong><div class="spacer"></div><button class="btn ghost" data-close aria-label="Close">✕</button></header>
+  <div class="body" id="usesBody"></div>
+</aside>
+<div id="tip" role="tooltip"></div>
+<div id="toast" role="status" hidden></div>
+
+<script src="engine.js"></script>
+<script>
+"use strict";
+const E = window.FactoryEngine, F = E.fmt;
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const store = { get(k, d) { try { const v = localStorage.getItem("airob:" + k); return v == null ? d : JSON.parse(v); } catch { return d; } }, set(k, v) { try { localStorage.setItem("airob:" + k, JSON.stringify(v)); } catch {} } };
+
+const GRADES = [["extreme", "Extreme PULL", "--c-extreme"], ["yes", "PULL", "--c-pull"], ["no", "No PULL", "--c-nopull"], ["unknown", "Not graded", "--c-unknown"]];
+const gradeColor = (g) => "var(" + (GRADES.find((x) => x[0] === g) || GRADES[3])[2] + ")";
+const gradeName = (g) => (GRADES.find((x) => x[0] === g) || GRADES[3])[1];
+const VIEWS = [["conversion", "Conversion and drop-off"], ["time", "Time through the factory"], ["flow", "Weekly flow"]];
+const LANES = [["everyone", "Everyone", "--c-everyone"], ["pull", "With PULL", "--c-pull"], ["nopull", "No PULL", "--c-nopull"]];
+const STEP_GROUPS = [["input", "Input", ["caseStudy"]], ["pipeline", "Pipeline", ["pipeline"]], ["sales", "Sales", ["pullRate", "closeRate", "cycleTime"]], ["delivery", "Delivery", ["successRate"]]];
+const STD_STAGE = { pipeline: "inflow", pullRate: "inflow", closeRate: "pull", cycleTime: "pull", successRate: "close" };
+
+const S = {
+  model: null, sample: false, config: {}, a: null, P: null,
+  filters: store.get("filters", { days: null, caseStudy: "all", pull: "all", channel: "all", owner: "all" }),
+  view: store.get("view", "conversion"), compare: store.get("compare", false),
+  scenario: null, chat: [], nowOpen: store.get("nowOpen", false), editGoal: false, insStack: [],
+};
+
+// ---------- load ----------
+async function load() {
+  try {
+    const [m, c] = await Promise.all([fetch("/api/model").then((r) => r.json()), fetch("/api/config").then((r) => r.json()).catch(() => ({}))]);
+    S.model = m.model; S.sample = m.sample; S.config = c;
+  } catch (e) {
+    $("#hero").innerHTML = '<div class="empty" style="grid-column:1/-1">Start the app with <code>node server.js</code> and open <code>http://localhost:4747</code>.</div>';
+    return;
+  }
+  render();
+}
+function analyze() {
+  const f = Object.assign({}, S.filters);
+  for (const k of Object.keys(f)) if (f[k] === "all" || f[k] == null) delete f[k];
+  if (S.compare) delete f.pull;
+  S.a = E.analyze(S.model, { filters: f, scenario: S.scenario });
+  S.P = E._internal.prepare(S.model);
+  S.ents = E._internal.applyFilters(S.P, f);
+}
+function render() {
+  analyze();
+  const a = S.a;
+  $("#co").textContent = (a.company.name || "") + " · data as of " + a.asOf;
+  $("#sampleBadge").hidden = !S.sample;
+  const dq = a.dataQuality.filter((q) => q.level !== "info");
+  $("#dqBadge").hidden = !a.dataQuality.length;
+  $("#dqBadge").textContent = dq.length ? "Data · " + dq.length + " issue" + (dq.length > 1 ? "s" : "") : "Data notes · " + a.dataQuality.length;
+  $("#refreshBtn").disabled = !S.config.canRefresh;
+  renderSetup(); renderHero(); renderSim(); renderNow(); renderStandards(); renderFactory();
+  if ($("#inspector").classList.contains("open") && S.insStack.length) inspect(S.insStack[S.insStack.length - 1], true);
+}
+
+// ---------- helpers ----------
+const M = () => S.a.milestones;
+const stageOf = (id) => S.a.stages.find((s) => s.id === id) || { id, name: id };
+const nm = (id) => stageOf(id).name;
+const short = (s, n) => (s.length > (n || 16) ? s.slice(0, (n || 16) - 1) + "…" : s);
+const monthYear = (d) => (d ? new Date(d + "T00:00:00Z").toLocaleDateString(undefined, { month: "short", year: "numeric", timeZone: "UTC" }) : "");
+function toast(text) { const t = $("#toast"); t.textContent = text; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), 3200); }
+
+// Where the bottleneck lives in the factory.
+function bnTarget() {
+  const b = S.a.bottleneck, m = M();
+  if (b.kind === "lever") {
+    const L = b.lever;
+    if (L.id === "standard:closeRate") return { stage: m.close, std: "closeRate", area: "sales" };
+    if (L.kind === "volume") return { stage: m.inflow, std: "pipeline", area: "pipeline" };
+    if (L.step) {
+      const to = L.step.split(">")[1];
+      const std = L.step === m.inflow + ">" + m.pull ? "pullRate" : to === m.success ? "successRate" : to === m.close ? "closeRate" : null;
+      return { stage: to, step: L.step, std, area: to === m.pull ? "pull" : stageOf(to).machine };
+    }
+  }
+  if (b.id === "realPull") return { stage: m.pull, std: "pullRate", area: "gate" };
+  if (b.id === "caseStudy") return { stage: m.close, std: "caseStudy", area: "gate" };
+  if (b.id === "repeatable") return { hopper: true, std: "caseStudy", area: "gate" };
+  const st = { pipeline: m.inflow, pullRate: m.pull, closeRate: m.close, cycleTime: m.close, successRate: m.success }[b.id];
+  return { stage: st || null, std: b.id, area: st ? stageOf(st).machine : "sales" };
+}
+
+// ---------- direct edits ----------
+async function edit(op, applyLocal) {
+  applyLocal(S.model);
+  render();
+  if (S.sample) { toast("This is the sample company, so I did not save that. Refresh and I will build yours."); return; }
+  try {
+    const r = await fetch("/api/edit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(op) }).then((x) => x.json());
+    if (!r.ok) { toast("Not saved: " + (r.error || "unknown error")); await load(); }
+    else if (r.version) toast("Saved. The old version is in versions/ if you want it back.");
+  } catch (e) { toast("Could not reach the server."); }
+}
+
+// ---------- setup strip ----------
+function renderSetup() {
+  const s = S.config.setup || {};
+  const sources = s.sources || [];
+  const dr = s.dealReviews || null;
+  const steps = [
+    ["Connect your sales data", sources.length ? sources.map((x) => x.name).join(", ") : "Call recorder, CRM, calendar, email. Connect whatever you have. I will work with it.", sources.length > 0, "Connect my sales data (call recorder, CRM, calendar, email) so you can build my GTM agent."],
+    ["Deal reviews on every change", dr && dr.mode ? (dr.mode === "extreme" ? "Extreme deal review" : "Deal review") + " on every changed deal" + (dr.lastRunAt ? ", last run " + dr.lastRunAt : "") + ". Next steps land in your tasks." : "Every deal that moves gets reviewed, and its next step lands in your tasks.", !!(dr && dr.mode), "Turn on extreme deal reviews for every deal that changes, and feed the next steps into my tasks."],
+    ["Your morning plan", s.schedule ? s.schedule.cadence + " at " + (s.schedule.at || "") + " via " + s.schedule.mechanism : "Every morning I read your calendar and put the bottleneck work first, before the day eats it.", !!s.schedule, "Set up my morning plan: every weekday, read my calendar and plan my day so I attack the bottleneck first."],
+    ["Where it reaches you", s.notify ? s.notify.channel + (s.notify.verifiedAt ? ", tested " + s.notify.verifiedAt : ", not tested yet") : "Wherever you actually look first thing. We send a real one to prove it works.", !!(s.notify && s.notify.verifiedAt), "Send my morning plan to me and test it end to end."],
+  ];
+  const done = steps.filter((x) => x[2]).length;
+  const wrap = $("#setup");
+  const hidden = store.get("setupHidden", false);
+  wrap.hidden = false;
+  if (done === steps.length || hidden) {
+    wrap.innerHTML = done === steps.length ? "" : '<div class="row" style="font-size:12px"><span class="muted">AI Rob setup: ' + done + " of " + steps.length + ' done</span><div class="progress"><span style="width:' + (done / steps.length) * 100 + '%"></span></div><button class="link" id="showSetup">Finish setup</button></div>';
+    wrap.hidden = done === steps.length;
+    const b = $("#showSetup"); if (b) b.onclick = () => { store.set("setupHidden", false); renderSetup(); };
+    return;
+  }
+  wrap.innerHTML = '<div class="card pad"><div class="row"><h2 style="margin:0">Put AI Rob to work</h2><span class="muted" style="font-size:12px">' + done + " of " + steps.length + ' done. Once these are on, I tell you what to do every morning. You stop guessing.</span><div class="spacer"></div><button class="btn ghost sm" id="hideSetup">Hide</button></div><div class="setup">'
+    + steps.map((x, i) => '<div class="step' + (x[2] ? " done" : "") + (i === 1 || i === 2 ? " key" : "") + '"><b>' + esc(x[0]) + '</b><div class="s">' + esc(x[1]) + "</div>" + (x[2] ? "" : '<div><button class="btn sm" data-ask="' + esc(x[3]) + '">Set this up</button></div>') + "</div>").join("") + "</div></div>";
+  $("#hideSetup").onclick = () => { store.set("setupHidden", true); renderSetup(); };
+}
+document.addEventListener("click", (e) => { const b = e.target.closest("[data-ask]"); if (b) { openChat(b.dataset.ask, b.hasAttribute("data-send")); } });
+
+// ---------- goal hero ----------
+function goalText(g) {
+  if (g.kind === "customers") return F.num(g.perWeek) + " new retained customers a week";
+  return F.money(g.target) + " ARR" + (g.by ? " by " + monthYear(g.by) : "");
+}
+function whenOf(x) {
+  if (x.hitWeek == null) return { big: "Not within 10 years", sub: x.plateauArr != null && isFinite(x.plateauArr) ? "ARR levels off near " + F.money(x.plateauArr) : "" };
+  return { big: F.weeksLabel(x.hitWeek), sub: monthYear(x.hitDate) + (x.range && x.range.p10 != null ? ", likely " + F.weeksLabel(Math.round(x.range.p10)) + " to " + F.weeksLabel(x.range.p90 == null ? null : Math.round(x.range.p90)) : "") };
+}
+function renderHero() {
+  const a = S.a, gv = a.goalView, g = gv.goal, b = a.bottleneck, acv = a.company.acv;
+  const solvedN = gv.solved.retainedPerWeek;
+  let h = '<div class="g-head"><span class="eyebrow">Your goal</span><strong>' + esc(g.label || goalText(g)) + '</strong><button class="link" id="goalEdit">change</button></div>';
+  if (S.editGoal) h += goalForm(g);
+  // the one line under everything: what is in the way, and where the move is
+  const foot = '<div class="g-foot"><span class="g-bn">Bottleneck</span><span>' + esc(b.title) + (solvedN == null ? ". Nothing to project past it until it is done." : "") + '</span><button class="link" data-jump="now">What to do today →</button></div>';
+  if (g.kind === "customers") {
+    const now = gv.now.retainedPerWeek || 0;
+    h += '<div class="g-stat"><span class="g-n num">' + F.num(now) + '</span><span class="g-of">of <b class="num">' + F.num(g.perWeek) + "</b> new customers a week</span>"
+      + '<span class="g-pct num">' + F.pct(gv.now.progress) + "</span></div>" + meter()
+      + (solvedN != null ? '<div class="g-solved">With the bottleneck solved: <b class="num">' + F.num(solvedN) + " a week</b>, " + F.pct(gv.solved.progress) + " of your goal.</div>" : "");
+    $("#hero").className = "card hero one";
+    $("#hero").innerHTML = h + foot;
+  } else {
+    let left = "";
+    if (!acv) left += '<p class="muted" style="margin:0">Tell me your typical first contract (ACV) and I will show you when you hit your goal. Today: ' + F.num(gv.now.retainedPerWeek) + " new retained customers a week.</p>";
+    else {
+      const n = whenOf(gv.now), s2 = solvedN != null ? whenOf(gv.solved) : null;
+      left += '<div class="tile"><span class="lbl"><i style="background:var(--c-base)"></i>At today\'s pace</span><div class="big">' + esc(n.big) + '</div><div class="sub">' + F.num(gv.now.retainedPerWeek) + " new customers a week" + (n.sub ? " · " + esc(n.sub) : "") + "</div></div>"
+        + '<div class="tile"><span class="lbl"><i style="background:var(--accent)"></i>With the bottleneck solved</span>'
+        + (s2 ? '<div class="big accent">' + esc(s2.big) + '</div><div class="sub">' + F.num(solvedN) + " new customers a week" + (s2.sub ? " · " + esc(s2.sub) : "") + "</div>" : '<div class="sub" style="margin-top:4px">Fix the bottleneck first. Until it is done there is no rate to project.</div>') + "</div>";
+      let delta = "";
+      if (gv.weeksSooner != null && gv.weeksSooner > 0) delta = F.weeksLabel(gv.weeksSooner) + " sooner.";
+      else if (gv.now.hitWeek == null && gv.solved.hitWeek != null) delta = "From never to " + F.weeksLabel(gv.solved.hitWeek) + ".";
+      else if (gv.solved.plateauArr != null && gv.now.plateauArr != null && gv.solved.hitWeek == null) delta = "Your ceiling goes from " + F.money(gv.now.plateauArr) + " to " + F.money(gv.solved.plateauArr) + "." + (gv.solved.plateauArr < g.target ? " Then the next bottleneck." : "");
+      if (delta) left += '<div class="g-solved"><b>Solve it:</b> ' + esc(delta) + "</div>";
+      const r = gv.required;
+      if (r && r.retainedPerWeek != null) left += '<div class="g-solved">To hit it by <b>' + esc(monthYear(r.by)) + "</b>: " + F.num(r.retainedPerWeek) + " new customers a week" + (r.multiple ? " (" + F.num(r.multiple) + "x today)" : "") + (r.meetingsPerWeek ? ", about " + F.num(r.meetingsPerWeek) + " first meetings a week" : "") + (r.sellers ? ", or " + r.sellers + " sellers working like today" : "") + ".</div>";
+    }
+    $("#hero").className = "card hero";
+    $("#hero").innerHTML = h + '<div class="g-left">' + left + "</div>" + '<div class="hero-chart">' + (acv ? arrSvg() : "") + "</div>" + foot;
+  }
+  $("#goalEdit").onclick = () => { S.editGoal = !S.editGoal; renderHero(); };
+  wireGoalForm(); wireArrHover();
+}
+// customers a week against the goal, as a plain HTML meter
+function meter() {
+  const gv = S.a.goalView, g = gv.goal, sc = S.a.scenario, now = gv.now.retainedPerWeek || 0;
+  const max = Math.max(g.perWeek, now, gv.solved.retainedPerWeek || 0, sc ? sc.retainedPerWeek || 0 : 0) * 1.12 || 1;
+  const at = (v) => (Math.min(v, max) / max * 100).toFixed(2) + "%";
+  let m = '<div class="meter" role="img" aria-label="' + F.num(now) + " of " + F.num(g.perWeek) + ' new customers a week"><div class="track"><span class="fill" style="width:' + at(now) + '"></span>';
+  if (gv.solved.retainedPerWeek != null) m += '<span class="mk solved" style="left:' + at(gv.solved.retainedPerWeek) + '"><em>solved ' + F.num(gv.solved.retainedPerWeek) + "</em></span>";
+  if (sc) m += '<span class="mk scen" style="left:' + at(sc.retainedPerWeek || 0) + '"><em>' + esc(short(sc.label, 22)) + "</em></span>";
+  m += '<span class="mk goal" style="left:' + at(g.perWeek) + '"><em>goal ' + F.num(g.perWeek) + "</em></span></div></div>";
+  return m;
+}
+function goalForm(g) {
+  return '<form class="goal-form" id="goalForm"><label>Goal<select name="kind"><option value="arr"' + (g.kind === "arr" ? " selected" : "") + '>ARR</option><option value="customers"' + (g.kind === "customers" ? " selected" : "") + '>New customers a week</option></select></label>'
+    + '<label data-k="arr">Target ARR ($M)<input type="number" name="target" min="0.1" step="0.1" value="' + (g.kind === "arr" ? +(g.target / 1e6).toFixed(2) : 100) + '"></label>'
+    + '<label data-k="arr">By (optional)<input type="date" name="by" value="' + esc(g.by || "") + '"></label>'
+    + '<label data-k="customers">Customers a week<input type="number" name="perWeek" min="0.1" step="0.1" value="' + (g.kind === "customers" ? g.perWeek : 2) + '"></label>'
+    + '<button class="btn primary sm">Save</button><button type="button" class="btn sm" id="goalCancel">Cancel</button></form>';
+}
+function wireGoalForm() {
+  const f = $("#goalForm");
+  if (!f) return;
+  const sync = () => f.querySelectorAll("[data-k]").forEach((l) => (l.hidden = l.dataset.k !== f.kind.value));
+  sync(); f.kind.onchange = sync;
+  $("#goalCancel").onclick = () => { S.editGoal = false; renderHero(); };
+  f.onsubmit = (e) => {
+    e.preventDefault();
+    const goal = f.kind.value === "customers" ? { kind: "customers", perWeek: +f.perWeek.value } : { kind: "arr", target: Math.round(+f.target.value * 1e6) };
+    if (f.kind.value === "arr" && f.by.value) goal.by = f.by.value;
+    if (!(goal.perWeek > 0 || goal.target > 0)) return toast("Enter a positive number.");
+    S.editGoal = false;
+    edit({ op: "goal", goal }, (m) => { m.goal = goal; });
+  };
+}
+function arrSvg() {
+  const a = S.a, gv = a.goalView, sc = a.scenario, target = gv.goal.target;
+  const series = [["Today's pace", gv.now.arr, "--c-base", ""]];
+  if (gv.solved.arr) series.push(["Bottleneck solved", gv.solved.arr, "--accent", ""]);
+  if (gv.ceiling.arr && a.extreme.retainedPerWeek > 0) series.push(["Ceiling: calendars full of extreme PULL", gv.ceiling.arr, "--faint", "4 4"]);
+  if (sc) series.push([sc.label, sc.projection.arr, "--c-scen", ""]);
+  const W = 560, H = 230, L = 46, R = 14, T = 14, B = 26, maxW = 520;
+  const maxV = Math.max(target * 1.25, Math.min(target * 1.6, Math.max(...series.flatMap((s) => s[1].map((p) => p.arr)))));
+  const X = (w) => L + (w / maxW) * (W - L - R), Y = (v) => T + (1 - Math.min(v, maxV) / maxV) * (H - T - B);
+  let svg = "";
+  const step = maxV > 4e8 ? 1e8 : maxV > 1.5e8 ? 5e7 : maxV > 4e7 ? 2.5e7 : maxV > 1.5e7 ? 5e6 : maxV > 4e6 ? 1e6 : 5e5;
+  for (let v = 0; v <= maxV; v += step) svg += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="var(--line-soft)"/><text x="' + (L - 6) + '" y="' + (Y(v) + 4) + '" text-anchor="end">' + F.money(v) + "</text>";
+  for (let y = 0; y <= 10; y += 2) svg += '<text x="' + X(y * 52) + '" y="' + (H - 8) + '" text-anchor="middle">' + (y === 0 ? "now" : y + "y") + "</text>";
+  svg += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(target) + '" y2="' + Y(target) + '" stroke="var(--ink-2)" stroke-dasharray="5 4"/><text x="' + (W - R) + '" y="' + (Y(target) - 6) + '" text-anchor="end" class="ink2" style="font-weight:600">Goal ' + F.money(target) + "</text>";
+  if (gv.goal.by) { const wb = Math.round((new Date(gv.goal.by) - new Date(a.asOf)) / (7 * 864e5)); if (wb > 0 && wb <= maxW) svg += '<line x1="' + X(wb) + '" x2="' + X(wb) + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--ink-2)" stroke-dasharray="2 3"/><circle cx="' + X(wb) + '" cy="' + Y(target) + '" r="4" fill="var(--ink-2)"/>'; }
+  const sg = sc && sc.params && sc.params.goal;
+  if (sg && sg.target && sg.by) { const wb = Math.round((new Date(sg.by) - new Date(a.asOf)) / (7 * 864e5)); if (wb > 0 && wb <= maxW) svg += '<line x1="' + L + '" x2="' + X(wb) + '" y1="' + Y(sg.target) + '" y2="' + Y(sg.target) + '" stroke="var(--c-scen)" stroke-dasharray="3 3"/><circle cx="' + X(wb) + '" cy="' + Y(sg.target) + '" r="5" fill="none" stroke="var(--c-scen)" stroke-width="2"/><text x="' + (X(wb) + 8) + '" y="' + (Y(sg.target) + 4) + '" style="fill:var(--c-scen);font-weight:600">' + F.money(sg.target) + " by " + monthYear(sg.by) + "</text>"; }
+  series.slice().reverse().forEach(([l, pts, c, dash]) => {
+    const p = pts.filter((q) => q.week <= maxW);
+    svg += '<path d="M' + p.map((q) => X(q.week).toFixed(1) + "," + Y(q.arr).toFixed(1)).join(" L") + '" fill="none" stroke="var(' + c + ')" stroke-width="' + (c === "--faint" ? 1.5 : 2.5) + '"' + (dash ? ' stroke-dasharray="' + dash + '"' : "") + ' stroke-linecap="round"/>';
+    const hit = p.find((q) => q.arr >= target);
+    if (hit && c !== "--faint") svg += '<circle cx="' + X(hit.week) + '" cy="' + Y(target) + '" r="5" fill="var(' + c + ')" stroke="var(--surface)" stroke-width="2"/>';
+  });
+  svg += '<line id="xh" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--faint)" opacity="0"/><rect id="hit" x="' + L + '" y="' + T + '" width="' + (W - L - R) + '" height="' + (H - T - B) + '" fill="transparent"/>';
+  S._arr = { series, X, W, L, R, maxW };
+  return '<div class="legend" style="margin-bottom:4px">' + series.map((s) => '<span><i style="background:var(' + s[2] + ')"></i>' + esc(s[0]) + "</span>").join("") + "</div>"
+    + '<svg id="arrSvg" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="ARR over the next 10 years at today\'s pace and with the bottleneck solved">' + svg + "</svg>"
+    + '<div class="faint" style="font-size:11px">Retained customers a week × contract size, minus churn (' + F.pct(a.extreme.projection.annualChurn) + " a year). A ceiling with today's team. Not a forecast.</div>";
+}
+function wireArrHover() {
+  const svg = $("#arrSvg"), hit = $("#hit"), xh = $("#xh");
+  if (!svg || !hit) return;
+  hit.addEventListener("mousemove", (e) => {
+    const r = svg.getBoundingClientRect(), P = S._arr;
+    const sx = ((e.clientX - r.left) / r.width) * P.W;
+    const wk = Math.max(0, Math.min(P.maxW, ((sx - P.L) / (P.W - P.L - P.R)) * P.maxW));
+    const lines = P.series.map(([l, pts]) => { const p = pts.reduce((b, q) => (Math.abs(q.week - wk) < Math.abs(b.week - wk) ? q : b)); return l + ": " + F.money(p.arr); });
+    xh.setAttribute("x1", P.X(wk)); xh.setAttribute("x2", P.X(wk)); xh.setAttribute("opacity", 1);
+    showTip(e, (wk < 52 ? Math.round(wk / 4.345) + " months" : (wk / 52).toFixed(1) + " years") + "\n" + lines.join("\n"));
+  });
+  hit.addEventListener("mouseleave", () => { xh.setAttribute("opacity", 0); hideTip(); });
+}
+// ---------- simulate ----------
+function renderSim() {
+  const a = S.a, sc = a.scenario;
+  const ai = (a.suggestions && a.suggestions.simulations) || [];
+  const fallback = [
+    { label: "What if we hire one more seller?", scenario: { label: "+1 seller, calendars full", sellersAdded: 1, fillCalendar: true } },
+    { label: "What if calendars were full of extreme PULL?", scenario: { label: "Extreme PULL only, calendars full", cohort: { pull: "extreme" }, fillCalendar: true, fastest: true } },
+  ];
+  const sugs = ai.length ? ai : fallback;
+  S._sugs = sugs;
+  let h = '<form class="ask" id="simAsk"><span class="lead">✦ Simulate</span><input id="simQ" placeholder="What if I want ' + esc(F.money(Math.max(1e6, Math.round((a.company.arr || 1e6) * 5 / 1e6) * 1e6))) + ' ARR by next year? What if I hire another rep?" aria-label="Ask a what-if question"><button class="btn primary">Run</button></form>'
+    + '<div class="sugs">' + sugs.map((s, i) => '<button type="button" class="' + (ai.length ? "ai" : "") + '" data-sug="' + i + '">' + esc(s.label) + "</button>").join("") + '<button type="button" class="link" id="simAdjust" style="margin-left:4px">' + (S.adjust ? "Hide the dials" : "Set the dials yourself") + "</button></div>";
+  if (S.adjust) h += adjustForm(sc);
+  if (sc) {
+    const r = sc.required, g = a.goalView.goal, w = sc.projection.hitWeek;
+    h += '<div class="sim-result"><div class="row"><strong>' + esc(sc.label) + '</strong><div class="spacer"></div><button class="btn ghost sm" id="simClear">Clear</button></div>'
+      + F.num(sc.retainedPerWeek) + " new retained customers a week (today " + F.num(a.baseline.retainedPerWeek) + "), " + F.num(sc.meetingsPerWeek) + " first meetings a week. "
+      + (g.kind === "customers" ? F.pct((sc.retainedPerWeek || 0) / g.perWeek) + " of your goal." : w != null ? "Reaches " + F.money(sc.projection.target) + " in " + F.weeksLabel(w) + (sc.monteCarlo.hitWeek.p10 != null ? " (likely " + F.weeksLabel(Math.round(sc.monteCarlo.hitWeek.p10)) + " to " + F.weeksLabel(sc.monteCarlo.hitWeek.p90 == null ? null : Math.round(sc.monteCarlo.hitWeek.p90)) + ")" : "") + "." : "Does not reach " + F.money(sc.projection.target) + " within 10 years.")
+      + (r && r.retainedPerWeek != null ? " <strong>To get there by " + esc(monthYear(r.by)) + ":</strong> " + F.num(r.retainedPerWeek) + " a week" + (r.multiple ? " (" + F.num(r.multiple) + "x this factory)" : "") + (r.meetingsPerWeek ? ", about " + F.num(r.meetingsPerWeek) + " first meetings a week" : "") + (r.sellers ? ", or " + r.sellers + " sellers" : "") + "." : "")
+      + (sc.params && sc.params.why ? '<div class="muted" style="font-size:12px;margin-top:2px">Assumes: ' + esc(sc.params.why) + "</div>" : "") + "</div>";
+  }
+  $("#sim").innerHTML = h;
+  $("#simAsk").onsubmit = (e) => { e.preventDefault(); const q = $("#simQ").value.trim(); if (q) openChat(q, true); };
+  $$("[data-sug]").forEach((b) => (b.onclick = () => {
+    const s = S._sugs[+b.dataset.sug];
+    if (s.scenario) { S.scenario = s.scenario; render(); }
+    else openChat(s.label, true);
+  }));
+  $("#simAdjust").onclick = () => { S.adjust = !S.adjust; renderSim(); };
+  const c = $("#simClear"); if (c) c.onclick = () => { S.scenario = null; render(); };
+  wireAdjust();
+}
+function adjustForm(sc) {
+  const a = S.a, p = (sc && sc.params) || {};
+  const csOpts = a.options.caseStudies.map((c) => '<option value="' + esc(c.id) + '"' + (p.cohort && p.cohort.caseStudy === c.id ? " selected" : "") + ">" + esc(c.name) + "</option>").join("");
+  return '<form class="form" id="adjForm">'
+    + '<label>Only this case study<select name="caseStudy"><option value="">Any</option>' + csOpts + "</select></label>"
+    + '<label>Only these buyers<select name="pull"><option value="">Everyone</option><option value="pull">With PULL</option><option value="extreme">Extreme PULL</option></select></label>'
+    + '<label>Fill calendars<select name="fill"><option value="1">Yes</option><option value=""' + (p.fillCalendar === false ? " selected" : "") + '>No</option></select></label>'
+    + '<label>First meetings a week<input type="number" name="meetings" min="0" step="1" placeholder="auto"></label>'
+    + '<label>Sellers added<input type="number" name="sellers" min="0" step="1" value="' + (p.sellersAdded || 0) + '"></label>'
+    + '<label>Contract size ($)<input type="number" name="acv" min="0" step="1000" placeholder="' + (a.company.acv || "") + '"></label>'
+    + '<label>Goal ARR ($M)<input type="number" name="target" min="0" step="0.5" placeholder="' + (a.goal.kind === "arr" ? a.goal.target / 1e6 : 100) + '"></label>'
+    + '<label>By<input type="date" name="by"></label>'
+    + '<button class="btn primary">Simulate</button></form>';
+}
+function wireAdjust() {
+  const f = $("#adjForm");
+  if (!f) return;
+  f.onsubmit = (e) => {
+    e.preventDefault();
+    const v = Object.fromEntries(new FormData(f));
+    const cohort = {};
+    if (v.caseStudy) cohort.caseStudy = v.caseStudy;
+    if (v.pull) cohort.pull = v.pull;
+    const parts = [v.caseStudy ? S.a.options.caseStudies.find((c) => c.id === v.caseStudy).name : null, v.pull === "extreme" ? "extreme PULL" : v.pull === "pull" ? "PULL" : null].filter(Boolean);
+    const sc = { label: (parts.length ? "Only " + parts.join(", ") : "Simulation") + (v.fill ? ", calendars full" : "") + (+v.sellers ? ", +" + v.sellers + " sellers" : ""),
+      cohort: Object.keys(cohort).length ? cohort : null, fillCalendar: !!v.fill, sellersAdded: +v.sellers || 0 };
+    if (v.meetings !== "") sc.meetingsPerWeek = +v.meetings;
+    if (v.acv !== "") sc.acv = +v.acv;
+    if (v.target !== "" || v.by) { sc.goal = { target: v.target !== "" ? +v.target * 1e6 : (S.a.goal.target || 1e8) }; if (v.by) sc.goal.by = v.by; sc.label += ", goal " + F.money(sc.goal.target) + (v.by ? " by " + monthYear(v.by) : ""); }
+    S.scenario = sc; render();
+  };
+}
+
+// ---------- right now ----------
+function renderNow() {
+  const a = S.a, b = a.bottleneck, c = a.coaching || {}, t = bnTarget();
+  const filtered = Object.entries(S.filters).some(([k, v]) => v && v !== "all");
+  const tasks = a.tasks || [], open = tasks.filter((x) => !x.done);
+  const today = new Date().toISOString().slice(0, 10);
+  const plan = a.plan && Array.isArray(a.plan.blocks) && (a.plan.date === today || a.plan.date === a.asOf) ? a.plan : null;
+  let h = '<div class="row"><span class="eyebrow">Right now</span><button class="chip" data-bn>' + esc(b.title) + (b.lever ? " · +" + F.num(b.lever.gain, 2) + " customers a week" : "") + "</button></div>";
+  h += '<div class="now-title">' + esc(c.move ? c.headline || b.title : b.title) + "</div>";
+  h += '<p class="now-why">' + esc(c.move ? c.why || b.why : b.why) + "</p>";
+  if (c.today) h += '<div class="today"><span class="tag">Do this today</span><span class="what">' + esc(c.today) + "</span></div>";
+  else h += '<div class="today"><span class="tag">Do this today</span><span class="what">Ask me what to do about it. <button class="btn sm" data-ask="What should I do about the bottleneck today?" data-send>Ask</button></span></div>';
+  if (c.bottleneckId && c.bottleneckId !== b.id) h += '<div class="stale">' + (filtered ? "This advice is for the whole factory. The filtered view has a different bottleneck." : "I wrote this for a different bottleneck. Refresh and I will redo it.") + "</div>";
+  const label = (S.nowOpen ? "Hide" : "Show") + " the full plan" + (plan ? ", today's schedule" : "") + (open.length ? " and " + open.length + " task" + (open.length > 1 ? "s" : "") : "");
+  h += '<div class="now-toggle"><button class="btn sm" id="nowToggle" aria-expanded="' + S.nowOpen + '">' + (S.nowOpen ? "▴ " : "▾ ") + esc(label) + "</button></div>";
+  if (S.nowOpen) {
+    let l = "";
+    if (c.move) l += '<div class="eyebrow">The move</div><p>' + esc(c.move) + "</p>";
+    if (c.ladder && c.ladder.length) l += '<div class="eyebrow">If it stalls</div><ol>' + c.ladder.map((x) => "<li>" + esc(x) + "</li>").join("") + "</ol>";
+    if (!l) l = '<p class="muted">No advice yet. Refresh, or ask me "what should I do about the bottleneck?"</p>';
+    let r = '<div class="eyebrow">Today\'s plan</div>';
+    if (plan) r += (plan.summary ? "<p>" + esc(plan.summary) + "</p>" : "") + '<div class="blocks">' + plan.blocks.map((x) => '<div class="block' + (x.bottleneck ? " bn" : "") + '"><span class="t">' + esc(x.at || "") + (x.until ? " to " + esc(x.until) : "") + '</span><span class="d"></span><div><div>' + esc(x.title) + "</div>" + (x.why ? '<div class="w">' + esc(x.why) + "</div>" : "") + "</div></div>").join("") + "</div>";
+    else r += '<p class="muted">No plan for today yet. ' + ((S.config.setup || {}).schedule ? "It arrives with your next morning run." : '<button class="link" data-ask="Set up my morning plan: every weekday, read my calendar and plan my day so I attack the bottleneck first.">Set up the morning plan</button>') + "</p>";
+    r += '<div class="eyebrow" style="margin-top:12px">Tasks</div>';
+    if (tasks.length) r += '<div class="tasks">' + taskRows(open) + "</div>" + (tasks.length > open.length ? '<details><summary>' + (tasks.length - open.length) + " done</summary><div class=\"tasks\">" + taskRows(tasks.filter((x) => x.done)) + "</div></details>" : "");
+    else r += '<p class="muted">No tasks yet. Turn on deal reviews and every deal\'s next step shows up here.</p>';
+    h += '<div class="now-more"><div>' + l + "</div><div>" + r + "</div></div>";
+  }
+  $("#now").innerHTML = h;
+  $("#nowToggle").onclick = () => { S.nowOpen = !S.nowOpen; store.set("nowOpen", S.nowOpen); renderNow(); };
+  $$("#now [data-task]").forEach((cb) => (cb.onchange = () => {
+    const id = cb.dataset.task, done = cb.checked;
+    edit({ op: "task", id, done }, (m) => { const x = (m.tasks || []).find((y) => y.id === id); if (x) { x.done = done; if (done) x.doneAt = today; else delete x.doneAt; } });
+  }));
+  $("#now [data-bn]").onclick = () => (t.hopper ? inspect({ kind: "hopper" }) : t.std ? inspect({ kind: "std", id: t.std }) : t.stage ? inspect({ kind: "stage", stage: t.stage }) : null);
+}
+function taskRows(xs) {
+  return xs.map((x) => '<label class="task' + (x.done ? " done" : "") + '"><input type="checkbox" data-task="' + esc(x.id) + '"' + (x.done ? " checked" : "") + '><span class="tt">' + esc(x.title) + '</span><span class="meta">'
+    + (x.bottleneck ? '<span class="src bn">Bottleneck</span>' : x.source === "deal-review" ? '<span class="src dr">Deal review</span>' : x.source ? '<span class="src">' + esc(x.source) + "</span>" : "")
+    + (x.entityName ? '<button type="button" class="link" data-deal="' + esc(x.entity) + '">' + esc(x.entityName) + "</button>" : "")
+    + (x.due ? "<span>due " + esc(x.due) + "</span>" : "") + (x.link ? '<span class="faint" title="Deal review files">' + esc(x.link) + "</span>" : "") + "</span></label>").join("");
+}
+document.addEventListener("click", (e) => { const d = e.target.closest("[data-deal]"); if (d) { e.preventDefault(); inspect({ kind: "deal", id: d.dataset.deal }); } });
+document.addEventListener("click", (e) => { const j = e.target.closest("[data-jump]"); if (j) { const el = document.getElementById(j.dataset.jump); el.scrollIntoView({ behavior: "smooth", block: "start" }); } });
+
+// ---------- standards ----------
+function stdValue(s) {
+  const a = S.a;
+  if (s.id === "caseStudy") return [s.value + (s.value === 1 ? " repeat" : " repeats"), s.note];
+  if (s.id === "pipeline") return [s.value == null ? "—" : F.num(s.value) + "/wk", "first meetings, bar " + s.bar + "/wk (" + a.band.label + ")"];
+  if (s.id === "cycleTime") return [s.value == null ? "—" : Math.round(s.value) + " days", "PULL to signed, bar " + s.bar + " days"];
+  const v = s.status === "miss" && F.pct(s.value) === F.pct(s.bar) ? (s.value * 100).toFixed(1) + "%" : F.pct(s.value);
+  return [v, s.unit + ", bar " + F.pct(s.bar)];
+}
+function renderStandards() {
+  const a = S.a, bn = bnTarget().std;
+  const byId = Object.fromEntries(a.standards.map((s) => [s.id, s]));
+  $("#stds").innerHTML = '<div class="stdgrid">' + STEP_GROUPS.map(([gid, gl, ids], gi) => '<div class="grp g-' + gid + '"><div class="grp-h">' + (gi ? '<span class="arrow">→</span>' : "") + esc(gl) + (gid === "input" ? ' <span class="faint" style="letter-spacing:0;text-transform:none;font-family:var(--sans)">what flows in</span>' : "") + '</div><div class="grp-c">'
+    + ids.map((id) => {
+      const s = byId[id]; if (!s) return "";
+      const [v, bar] = stdValue(s);
+      const icon = s.status === "pass" ? "✓ Pass" : s.status === "miss" ? "✗ Miss" : "? Unknown";
+      return '<button class="std' + (bn === s.id ? " is-bn" : "") + '" data-std="' + s.id + '"><div class="eyebrow">' + esc(s.label) + '</div><div class="v num">' + esc(v) + '</div><div class="b">' + esc(bar) + '</div><div class="foot"><span class="pill ' + s.status + '">' + icon + '</span><span class="more">' + (s.id === "caseStudy" ? "see examples" : s.n != null ? s.n + " deals" : "") + " ›</span></div></button>";
+    }).join("") + "</div></div>").join("") + "</div>";
+  $$("[data-std]").forEach((b) => (b.onclick = () => inspect({ kind: "std", id: b.dataset.std })));
+}
+
+// ---------- the factory (isometric) ----------
+// Axonometric projection: x runs along the line (down-right), y is depth
+// (cohort lanes, down-left), z is height.
+const EX = [0.97, 0.2], EY = [-0.5, 0.42], SC = 36;
+const proj = (x, y, z) => [(x * EX[0] + y * EY[0]) * SC, (x * EX[1] + y * EY[1] - z) * SC];
+const pts = (arr) => arr.map((p) => { const q = proj(p[0], p[1], p[2]); return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join(" ");
+function shade(color, k) { return k === 0 ? color : "color-mix(in srgb," + color + " " + (100 - Math.abs(k)) + "%," + (k > 0 ? "white" : "black") + ")"; }
+function box(x, y, z, w, d, h, color, opts) {
+  opts = opts || {};
+  const top = [[x, y, z + h], [x + w, y, z + h], [x + w, y + d, z + h], [x, y + d, z + h]];
+  const front = [[x, y + d, z], [x + w, y + d, z], [x + w, y + d, z + h], [x, y + d, z + h]];
+  const side = [[x + w, y, z], [x + w, y + d, z], [x + w, y + d, z + h], [x + w, y, z + h]];
+  if (opts.wire) {
+    const st = 'fill="none" stroke="' + color + '" stroke-width="1.4" stroke-dasharray="3 3"';
+    return "<polygon points=\"" + pts(top) + '" ' + st + "/><polygon points=\"" + pts(front) + '" ' + st + "/><polygon points=\"" + pts(side) + '" ' + st + "/>";
+  }
+  const o = opts.opacity != null ? ' opacity="' + opts.opacity + '"' : "";
+  return '<polygon points="' + pts(front) + '" fill="' + shade(color, -8) + '"' + o + '/><polygon points="' + pts(side) + '" fill="' + shade(color, -28) + '"' + o + '/><polygon points="' + pts(top) + '" fill="' + shade(color, 22) + '"' + o + "/>";
+}
+const txt = (x, y, z, s, cls, extra) => { const q = proj(x, y, z); return '<text x="' + q[0].toFixed(1) + '" y="' + q[1].toFixed(1) + '" ' + (cls ? 'class="' + cls + '" ' : "") + (extra || "") + ">" + s + "</text>"; };
+
+function factoryStations() {
+  const a = S.a, m = M(), fun = a.funnel;
+  const inflowIdx = a.stages.findIndex((s) => s.id === m.inflow);
+  const hasAgg = fun.stages.slice(0, inflowIdx).some((s) => s.aggregate);
+  let from = hasAgg && !S.compare && S.view !== "time" ? 0 : inflowIdx;
+  let ids = a.stages.slice(from).map((s) => s.id);
+  // drop trailing stages nobody reached
+  while (ids.length > 2 && !fun.stages.find((s) => s.id === ids[ids.length - 1]).count) ids.pop();
+  return ids;
+}
+function laneData() {
+  const a = S.a;
+  if (!S.compare) return [{ id: "one", label: S.filters.pull && S.filters.pull !== "all" ? { pull: "With PULL", extreme: "Extreme PULL", nopull: "No PULL" }[S.filters.pull] : "Everyone", color: "var(--station)", funnel: a.funnel, durations: a.durations }];
+  return LANES.map(([id, l, c]) => ({ id, label: l + " · " + a.lanes[id].n, color: "var(" + c + ")", funnel: a.lanes[id].funnel, durations: a.lanes[id].durations }));
+}
+function renderFactory() {
+  const a = S.a, o = a.options, f = S.filters;
+  const seg = (key, opts) => '<div class="seg" role="group">' + opts.map(([v, l]) => '<button data-f="' + key + '" data-v="' + v + '" aria-pressed="' + (key === "pull" && S.compare ? v === "compare" : String(f[key] ?? "all") === String(v) && !(key === "pull" && S.compare)) + '">' + l + "</button>").join("") + "</div>";
+  const sel = (key, label, opts) => opts.length ? '<select class="f" data-f="' + key + '" aria-label="' + label + '"><option value="all">' + label + ": all</option>" + opts.map((x) => '<option value="' + esc(x.id || x) + '"' + (f[key] === (x.id || x) ? " selected" : "") + ">" + esc(x.name || x) + "</option>").join("") + "</select>" : "";
+  let h = '<div class="fac-ctl"><select class="f" id="viewSel" aria-label="View">' + VIEWS.map(([v, l]) => '<option value="' + v + '"' + (S.view === v ? " selected" : "") + ">" + l + "</option>").join("") + "</select>"
+    + seg("pull", [["all", "Everyone"], ["pull", "PULL"], ["extreme", "Extreme"], ["nopull", "No PULL"], ["compare", "Compare"]])
+    + seg("days", [["all", "All time"], ["90", "90d"], ["30", "30d"]])
+    + sel("caseStudy", "Case study", o.caseStudies) + sel("channel", "Channel", o.channels) + sel("owner", "Seller", o.owners)
+    + '<span class="count">' + a.counts.entities + " of " + a.counts.all + " deals" + (a.counts.excluded ? ' · <button class="link" data-insp="excluded">' + a.counts.excluded + " removed</button>" : "") + "</span></div>";
+  h += '<div class="fac-svg">' + factorySvg() + "</div>" + factoryLegend() + '<div class="fac-note">' + factoryNote() + "</div>"
+    + "<details><summary>Show as a table</summary>" + factoryTable() + "</details>";
+  $("#factory").innerHTML = h;
+  $("#viewSel").onchange = (e) => { S.view = e.target.value; store.set("view", S.view); renderFactory(); };
+  $$("#factory [data-f]").forEach((el) => {
+    const set = (v) => {
+      if (el.dataset.f === "pull" && v === "compare") { S.compare = true; f.pull = "all"; }
+      else { if (el.dataset.f === "pull") S.compare = false; f[el.dataset.f] = el.dataset.f === "days" ? (v === "all" ? null : +v) : v; }
+      store.set("filters", f); store.set("compare", S.compare); render();
+    };
+    if (el.tagName === "SELECT") el.onchange = () => set(el.value); else el.onclick = () => set(el.dataset.v);
+  });
+  $$("#factory [data-hit]").forEach((g) => {
+    const go = () => { const v = JSON.parse(g.dataset.hit); inspect(v); };
+    g.addEventListener("click", go);
+    g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+  });
+  const ex = $("#factory [data-insp=excluded]"); if (ex) ex.onclick = () => inspect({ kind: "excluded" });
+}
+// The customer the case study is about: the first one who hit X, else the best fit.
+// A case study field is a string or a list of bullets (doctrine-factory-model.md, caseStudies).
+function csField(v) {
+  if (Array.isArray(v)) return v.length ? "<ul>" + v.map((x) => "<li>" + esc(x) + "</li>").join("") + "</ul>" : "";
+  return esc(v);
+}
+function caseHero(cs) {
+  const rank = { succeeded: 0, customer: 1, prospect: 2 };
+  const f = cs && (cs.fits || []).filter((x) => x.name).sort((p, q) => (rank[p.status] ?? 9) - (rank[q.status] ?? 9) || (p.grade === "strong" ? -1 : 0) - (q.grade === "strong" ? -1 : 0))[0];
+  const name = f ? f.name.split(" ")[0] : "your buyer";
+  return { name, initials: f ? f.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase() : "?" };
+}
+function factorySvg() {
+  const a = S.a, m = M(), ids = factoryStations(), lanes = laneData(), bn = bnTarget();
+  const GAP = 2.3, LANE = S.compare ? 2.7 : 1.9, SW = 0.9, SD = 0.8, HMAX = 3.6;
+  const X0 = S.compare ? 6 : 3.6; // room for the hopper (and lane names)
+  const xOf = (i) => X0 + i * GAP;
+  const yOf = (li) => li * LANE;
+  const idxOf = (id) => a.stages.findIndex((s) => s.id === id);
+  const inflowIdx = idxOf(m.inflow);
+  const parts = []; // [depth, svg]
+  const add = (depth, s) => parts.push([depth, s]);
+  const hitG = (obj, label, inner) => '<g class="hit" tabindex="0" role="button" aria-label="' + esc(label) + '" data-hit=\'' + esc(JSON.stringify(obj)) + "' data-tip=\"" + esc(label) + '">' + inner + "</g>";
+  // scales
+  const stageCount = (L, id) => (L.funnel.stages.find((s) => s.id === id) || {}).count || 0;
+  const isAgg = (L, id) => !!(L.funnel.stages.find((s) => s.id === id) || {}).aggregate;
+  const stepOf = (L, i) => L.funnel.steps.find((s) => s.from === ids[i] && s.to === ids[i + 1]);
+  // time runs to X; renewal is a contract cycle, not time in the factory
+  const succIdx = idxOf(m.success);
+  const durOf = (L, i) => (idxOf(ids[i]) >= succIdx ? null : (L.durations.find((d) => d.from === ids[i] && d.to === ids[i + 1]) || {}).median);
+  let maxEnt = 1, maxAgg = 1, maxDays = 1, maxFlow = 1, maxFlowAgg = 1;
+  const vols = {}, ghost = {};
+  for (const v of a.baseline.volumes || []) vols[v.stage] = v.perWeek;
+  const ghostSrc = a.scenario ? a.scenario.flow.volumes : a.goalView.solved.volumes;
+  for (const v of ghostSrc || []) ghost[v.stage] = v.perWeek;
+  for (const L of lanes) ids.forEach((id, i) => {
+    const c = stageCount(L, id);
+    if (isAgg(L, id)) maxAgg = Math.max(maxAgg, c); else maxEnt = Math.max(maxEnt, c);
+    const d = durOf(L, i); if (d != null) maxDays = Math.max(maxDays, d);
+  });
+  ids.forEach((id) => { const pre = idxOf(id) < inflowIdx; for (const v of [vols[id], ghost[id]]) if (v != null) { if (pre) maxFlowAgg = Math.max(maxFlowAgg, v); else maxFlow = Math.max(maxFlow, v); } });
+  const hEnt = (n, agg) => (n <= 0 ? 0.06 : Math.max(0.12, (n / (agg ? maxAgg : maxEnt)) * HMAX));
+  const hFlow = (v, pre) => (v == null || v <= 0 ? 0.06 : Math.max(0.12, (v / (pre ? maxFlowAgg : maxFlow)) * HMAX));
+  const nL = lanes.length, depth = (nL - 1) * LANE + SD;
+  const xEnd = xOf(ids.length - 1) + SW;
+  // machine slabs
+  const groups = [];
+  ids.forEach((id, i) => { const mc = stageOf(id).machine; const g = groups[groups.length - 1]; if (g && g.m === mc) g.to = i; else groups.push({ m: mc, from: i, to: i }); });
+  for (const g of groups) {
+    const x = xOf(g.from) - 0.55, w = xOf(g.to) + SW + 0.55 - x;
+    add(-100, box(x, -0.7, -0.22, w, depth + 2.2, 0.2, "var(--slab)"));
+    const label = { pipeline: "Pipeline", sales: "Sales", delivery: "Delivery" }[g.m] || g.m;
+    const std = { pipeline: "pipeline", sales: "closeRate", delivery: "successRate" }[g.m];
+    add(-99, hitG({ kind: "std", id: std }, label + " step", txt(x + 0.2, depth + 1.85, -0.02, label.toUpperCase(), "", 'style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;font-weight:600"')));
+  }
+  // belts
+  lanes.forEach((L, li) => {
+    const y = yOf(li) + SD / 2 - 0.16;
+    add(-50 + li, box(X0 - 1.2, y, 0, xEnd - X0 + 2.4, 0.32, 0.05, "var(--belt)"));
+    const a0 = proj(X0 - 1.1, y + 0.16, 0.06), a1 = proj(xEnd + 1.1, y + 0.16, 0.06);
+    add(-49 + li, '<line class="belt-run" x1="' + a0[0] + '" y1="' + a0[1] + '" x2="' + a1[0] + '" y2="' + a1[1] + '"/>');
+    if (nL > 1) {
+      // lane names sit on top of everything, as tags at the head of each belt
+      const q = proj(X0 - 1.2, y + 0.16, 0.06), w = L.label.length * 6.4 + 14;
+      add(2e4 + li, '<rect x="' + (q[0] - w - 4) + '" y="' + (q[1] - 9) + '" width="' + w + '" height="18" rx="9" fill="var(--surface)" stroke="' + L.color + '"/><text x="' + (q[0] - 4 - w / 2) + '" y="' + (q[1] + 4) + '" text-anchor="middle" class="ink2" style="font-weight:600">' + esc(L.label) + "</text>");
+    }
+  });
+  // the case study is the inflow: drawn as a case study document that feeds the belt
+  {
+    const cs = a.caseStudies[0], rep = a.standards.find((x) => x.id === "caseStudy"), who = caseHero(cs);
+    const A = proj(X0 - 1.2, depth / 2, 0.06), W = 150, H = 178, x = A[0] - W - 34, y = A[1] - H - 34;
+    const col = bn.hopper ? "var(--accent)" : "var(--faint)";
+    const lines = (y0, ws) => ws.map((w, k) => '<rect x="' + (x + 14) + '" y="' + (y0 + k * 8) + '" width="' + ((W - 28) * w).toFixed(1) + '" height="3.5" rx="1.75" fill="var(--line)"/>').join("");
+    let d = '<rect x="' + (x + 3) + '" y="' + (y + 4) + '" width="' + W + '" height="' + H + '" rx="3" fill="var(--ink)" opacity=".12"/>'
+      + '<rect x="' + x + '" y="' + y + '" width="' + W + '" height="' + H + '" rx="3" fill="var(--surface)" stroke="' + col + '" stroke-width="' + (bn.hopper ? 2 : 1) + '"' + (cs ? "" : ' stroke-dasharray="4 3"') + "/>"
+      + '<rect x="' + (x + 14) + '" y="' + (y + 13) + '" width="24" height="24" rx="4" fill="var(--c-extreme)"/><text x="' + (x + 26) + '" y="' + (y + 29) + '" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:10px">' + esc(who.initials) + "</text>"
+      + '<text x="' + (x + 45) + '" y="' + (y + 32) + '" class="ink" style="font-weight:700;font-size:17px">Case Study</text>'
+      + '<text x="' + (x + 14) + '" y="' + (y + 60) + '" class="ink" style="font-weight:700;font-size:13px">Demand</text>'
+      + '<text x="' + (x + 14) + '" y="' + (y + 70) + '" style="font-size:7.5px">What ' + esc(who.name) + " was trying to accomplish</text>" + lines(y + 77, [1, 0.94, 1, 0.7])
+      + '<text x="' + (x + 14) + '" y="' + (y + 123) + '" class="ink" style="font-weight:700;font-size:13px">Supply</text>'
+      + '<text x="' + (x + 14) + '" y="' + (y + 133) + '" style="font-size:7.5px">How we helped ' + esc(who.name) + " accomplish it</text>" + lines(y + 140, [1, 0.96, 0.62]);
+    // the curl from the page into the head of the belt
+    const sx = x + W - 10, sy = y + H + 2;
+    d += '<path d="M' + sx + "," + sy + " C" + (sx + 4) + "," + (sy + 26) + " " + (sx + 34) + "," + (sy + 24) + " " + (A[0] - 12) + "," + (A[1] - 6) + '" fill="none" stroke="var(--c-pull)" stroke-width="3.5" stroke-linecap="round"/>'
+      + '<path d="M' + (A[0] - 4) + "," + (A[1] - 2) + " l-12,-9 l-1,11 z" + '" fill="var(--c-pull)"/>';
+    d += '<text x="' + (x + W / 2) + '" y="' + (y - 22) + '" text-anchor="middle" class="ink2" style="font-weight:600">' + esc(cs ? short(cs.name, 30) : "No case study written yet") + "</text>"
+      + '<text x="' + (x + W / 2) + '" y="' + (y - 8) + '" text-anchor="middle" style="fill:var(' + (rep.status === "pass" ? "--good" : "--bad") + ');font-weight:600">' + (rep.status === "pass" ? "✓ repeatable" : "✗ " + esc(rep.note)) + "</text>";
+    S._doc = [[x - 4, y - 36], [x + W + 8, A[1] + 4]];
+    add(-10, hitG({ kind: "hopper" }, "Case study: what flows into the factory", d));
+  }
+  // stations, drop-off and dwell
+  lanes.forEach((L, li) => {
+    const y = yOf(li);
+    ids.forEach((id, i) => {
+      const x = xOf(i), pre = idxOf(id) < inflowIdx, cnt = stageCount(L, id), agg = isAgg(L, id);
+      const isBn = !S.compare && bn.stage === id;
+      const color = isBn ? "var(--accent)" : L.color;
+      let h, label;
+      if (S.view === "flow") { h = hFlow(vols[id], pre); label = vols[id] == null ? "" : F.num(vols[id]) + "/wk"; }
+      else if (S.view === "time") { h = 0.35; label = ""; }
+      else { h = hEnt(cnt, agg); label = F.num(cnt, 0); }
+      let s = box(x, y, 0.05, SW, SD, h, color);
+      if (S.view === "flow" && ghost[id] != null && Math.abs(ghost[id] - (vols[id] || 0)) > 1e-6) {
+        const gh = hFlow(ghost[id], pre), gc = a.scenario ? "var(--c-scen)" : "var(--accent)";
+        s += box(x - 0.05, y - 0.05, 0.05, SW + 0.1, SD + 0.1, gh, gc, { wire: true });
+        label = F.num(vols[id] || 0) + " → " + F.num(ghost[id]) + "/wk";
+        h = Math.max(h, gh);
+      }
+      const q = proj(x + SW / 2, y + SD / 2, 0.05 + h);
+      if (label) s += '<text x="' + q[0] + '" y="' + (q[1] - 8) + '" text-anchor="middle" class="ink num" style="font-weight:700;font-size:12px">' + esc(label) + "</text>";
+      if (li === 0) {
+        const nq = proj(x + SW / 2, y, 0.05 + Math.max(h, nL > 1 ? HMAX * 0.2 : 0));
+        s += '<text x="' + nq[0] + '" y="' + (nq[1] - (label ? 24 : 8)) + '" text-anchor="middle" class="ink2" style="font-weight:600">' + esc(short(stageOf(id).name, 15)) + "</text>";
+      }
+      const tip = stageOf(id).name + (L.label && nL > 1 ? " · " + L.label : "") + "\n" + (S.view === "flow" ? (vols[id] == null ? "Not in the flow model" : F.num(vols[id]) + " a week at steady state" + (ghost[id] != null ? "\n" + (a.scenario ? "Simulation: " : "Bottleneck solved: ") + F.num(ghost[id]) + " a week" : "")) : F.num(cnt, 0) + " reached" + (agg ? " (counted in aggregate)" : "")) + (isBn ? "\nThe bottleneck" : "");
+      add(x + y * 1.1 + 0.5, hitG({ kind: "stage", stage: id, lane: L.id }, tip, s));
+      // between this station and the next
+      if (i === ids.length - 1) return;
+      const st = stepOf(L, i), mx = x + SW + (GAP - SW) / 2;
+      if (S.view === "time") {
+        const d = durOf(L, i);
+        if (d == null) return;
+        const dh = Math.max(0.1, (d / maxDays) * HMAX * 0.8);
+        const stepBn = !S.compare && bn.step === ids[i] + ">" + ids[i + 1];
+        let t = box(mx - 0.45, y + 0.12, 0.05, 0.9, SD - 0.24, dh, stepBn ? "var(--accent)" : shade(L.color, 30), { opacity: 0.9 });
+        const tq = proj(mx, y + SD / 2, 0.05 + dh);
+        t += '<text x="' + tq[0] + '" y="' + (tq[1] - 6) + '" text-anchor="middle" class="ink num" style="font-weight:600">' + Math.round(d) + "d</text>";
+        add(mx + y * 1.1 + 0.4, hitG({ kind: "stage", stage: ids[i], lane: L.id }, nm(ids[i]) + " → " + nm(ids[i + 1]) + "\nMedian " + Math.round(d) + " days", t));
+        return;
+      }
+      if (S.view !== "conversion" || !st) return;
+      const pullStep = st.key === m.inflow + ">" + m.pull;
+      // in compare the lanes' heights already show the drop, so no spill boxes
+      const drops = [[pullStep ? "No PULL" : "Lost", st.lost, pullStep ? "var(--c-nopull)" : "var(--faint)"], ["Stalled", st.stalled, "var(--warn)"]].filter((d) => d[1] > 0 && !S.compare);
+      const total = drops.reduce((t, d) => t + d[1], 0);
+      let s2 = "", zz = 0;
+      const dScale = st.aggregate ? maxAgg : maxEnt;
+      for (const [l, n, c] of drops) {
+        const dh = Math.max(0.08, (n / dScale) * HMAX * 0.7);
+        s2 += box(mx - 0.32, y + SD + 0.12, zz, 0.64, 0.5, dh, c, { opacity: 0.85 });
+        zz += dh;
+      }
+      const stepBn = !S.compare && bn.step === st.key;
+      const bench = st.key === m.inflow + ">" + m.pull ? a.bars.pullRate : st.key === m.close + ">" + m.success ? a.bars.successRate : null;
+      const ok = bench != null && st.conv != null ? st.conv >= bench : null;
+      const cq = proj(mx, y + SD / 2, 0.1);
+      const convTxt = st.conv == null ? "" : F.pct(st.conv) + (ok == null ? "" : ok ? " ✓" : " ✗");
+      if (convTxt) s2 += '<rect x="' + (cq[0] - 20) + '" y="' + (cq[1] - 22) + '" width="40" height="16" rx="8" fill="' + (stepBn ? "var(--accent)" : "var(--surface)") + '" stroke="' + (stepBn ? "var(--accent)" : "var(--line)") + '"/><text x="' + cq[0] + '" y="' + (cq[1] - 10) + '" text-anchor="middle" class="num" style="font-size:10px;font-weight:600;fill:' + (stepBn ? "var(--surface)" : ok === false ? "var(--bad)" : "var(--ink-2)") + '">' + convTxt + "</text>";
+      if (total) { const lq = proj(mx, y + SD + 0.62, zz); s2 += '<text x="' + lq[0] + '" y="' + (lq[1] + 2) + '" text-anchor="middle" style="font-size:10px">−' + F.num(total, 0) + "</text>"; }
+      const tip2 = nm(st.from) + " → " + nm(st.to) + (nL > 1 ? " · " + L.label : "") + "\n" + (st.conv == null ? "No resolved deals yet" : F.pct(st.conv) + " continue (of resolved)") + (bench != null ? ", bar " + F.pct(bench) : "") + (drops.length ? "\n" + drops.map((d) => d[1] + " " + d[0].toLowerCase()).join(", ") : "") + (st.open ? "\n" + st.open + " still open" : "") + (stepBn ? "\nThe bottleneck" : "");
+      add(mx + (y + SD + 0.4) * 1.1, hitG({ kind: "stage", stage: st.from, lane: L.id }, tip2, s2));
+    });
+  });
+  // output: retained customers
+  {
+    const ox = xEnd + 1.9, oy = depth / 2 - 0.6;
+    const r = a.baseline.retainedPerWeek || 0;
+    let s = box(ox, oy, 0, 1.4, 1.2, 0.5, "var(--slab)");
+    const n = Math.min(12, Math.max(r > 0 ? 1 : 0, Math.round(r * 2)));
+    for (let k = 0; k < n; k++) s += box(ox + 0.12 + (k % 3) * 0.42, oy + 0.12 + (Math.floor(k / 3) % 2) * 0.5, 0.5 + Math.floor(k / 6) * 0.34, 0.32, 0.32, 0.3, "var(--c-pull)");
+    const q = proj(ox + 0.7, oy + 0.6, 1.6);
+    s += '<text x="' + q[0] + '" y="' + (q[1] - 16) + '" text-anchor="middle" class="ink num" style="font-weight:700;font-size:13px">' + F.num(r) + ' a week</text><text x="' + q[0] + '" y="' + (q[1] - 2) + '" text-anchor="middle">retained customers</text>';
+    add(1e4, hitG({ kind: "output" }, "Retained customers: " + F.num(r) + " a week at steady state", s));
+  }
+  parts.sort((p, q) => p[0] - q[0]);
+  const body = parts.map((p) => p[1]).join("");
+  // bounds
+  const corners = [proj(-0.5, -1, 4.9), proj(xEnd + 3.2, -1, 4.6), proj(-0.5, depth + 2.2, -0.4), proj(xEnd + 3.2, depth + 2.2, -0.4), proj(X0 - 3.4, depth, 0)];
+  corners.push(...S._doc);
+  const minX = Math.min(...corners.map((c) => c[0])) - 10, maxX = Math.max(...corners.map((c) => c[0])) + 10;
+  const minY = Math.min(...corners.map((c) => c[1])) - 10, maxY = Math.max(...corners.map((c) => c[1])) + 18;
+  return '<svg viewBox="' + minX.toFixed(0) + " " + minY.toFixed(0) + " " + (maxX - minX).toFixed(0) + " " + (maxY - minY).toFixed(0) + '" role="img" aria-label="Your case study factory: ' + esc(VIEWS.find((v) => v[0] === S.view)[1]) + '">' + body + "</svg>";
+}
+function factoryLegend() {
+  const it = (c, l) => '<span><i style="background:' + c + '"></i>' + l + "</span>";
+  let L = [];
+  if (S.compare) L = LANES.map(([id, l, c]) => it("var(" + c + ")", l));
+  else L.push(it("var(--accent)", "The bottleneck"));
+  if (S.view === "conversion" && !S.compare) L.push(it("var(--c-nopull)", "Dropped: no PULL"), it("var(--faint)", "Lost"), it("var(--warn)", "Stalled"));
+  if (S.view === "flow") L.push('<span><i style="border:1.5px dashed ' + (S.a.scenario ? "var(--c-scen)" : "var(--accent)") + ';background:none"></i>' + (S.a.scenario ? "Simulation" : "Bottleneck solved") + "</span>");
+  return '<div class="legend" style="margin-top:6px">' + L.join("") + "</div>";
+}
+function factoryNote() {
+  const a = S.a;
+  if (S.view === "flow") return "Steady state from the last " + (S.model.settings && S.model.settings.windowWeeks || 4) + " completed weeks. Outline: " + (a.scenario ? esc(a.scenario.label) : "the same factory with the bottleneck solved") + "." + (S.compare ? " Weekly flow is for the whole factory; compare lanes in the other views." : "");
+  if (S.view === "time") return "Median days between stages for deals that made it through. Pick Compare to see PULL and no PULL side by side.";
+  const push = a.funnel.push;
+  return "Pillar height is how many deals reached each stage. Conversion counts only resolved deals." + (a.funnel.stages.some((s) => s.aggregate) && !S.compare ? " Outreach is counted in aggregate and drawn on its own scale." : "") + (push && push.deals ? " " + push.won + " of " + push.deals + " no-PULL deals were pushed to a close anyway." : "");
+}
+function factoryTable() {
+  const lanes = laneData(), ids = factoryStations();
+  if (S.view === "flow") return '<table><thead><tr><th>Stage</th><th class=r>Per week</th><th class=r>' + (S.a.scenario ? "Simulation" : "Solved") + "</th></tr></thead><tbody>" + (S.a.baseline.volumes || []).map((v) => { const g = ((S.a.scenario ? S.a.scenario.flow.volumes : S.a.goalView.solved.volumes) || []).find((x) => x.stage === v.stage); return "<tr><td>" + esc(nm(v.stage)) + "</td><td class=r>" + F.num(v.perWeek) + "</td><td class=r>" + (g ? F.num(g.perWeek) : "—") + "</td></tr>"; }).join("") + "</tbody></table>";
+  return '<div class="scrollx"><table><thead><tr>' + (lanes.length > 1 ? "<th>Lane</th>" : "") + "<th>Step</th><th class=r>Entered</th><th class=r>Continued</th><th class=r>Lost</th><th class=r>Open</th><th class=r>Conversion</th><th class=r>Median days</th></tr></thead><tbody>"
+    + lanes.map((L) => ids.slice(0, -1).map((id, i) => { const s = L.funnel.steps.find((x) => x.from === id); const d = L.durations.find((x) => x.from === id); if (!s || !s.entered) return ""; return "<tr>" + (lanes.length > 1 ? "<td>" + esc(L.label) + "</td>" : "") + "<td>" + esc(nm(s.from) + " → " + nm(s.to)) + "</td><td class=r>" + F.num(s.entered, 0) + "</td><td class=r>" + F.num(s.continued, 0) + "</td><td class=r>" + F.num(s.lost + s.stalled, 0) + "</td><td class=r>" + F.num(s.open + (s.pending || 0), 0) + "</td><td class=r>" + F.pct(s.conv) + "</td><td class=r>" + (d && d.median != null ? Math.round(d.median) : "—") + "</td></tr>"; }).join("")).join("") + "</tbody></table></div>";
+}
+
+// ---------- inspector ----------
+function openDrawer(id) { ["chat", "inspector", "uses"].forEach((d) => $("#" + d).classList.toggle("open", d === id)); }
+$$("[data-close]").forEach((b) => (b.onclick = () => { b.closest(".drawer").classList.remove("open"); S.insStack = []; }));
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { $$(".drawer.open").forEach((d) => d.classList.remove("open")); S.insStack = []; } });
+$("#insBack").onclick = () => { S.insStack.pop(); inspect(S.insStack.pop()); };
+
+function inspect(t, keep) {
+  if (!t) return;
+  if (!keep) { const top = S.insStack[S.insStack.length - 1]; if (!top || JSON.stringify(top) !== JSON.stringify(t)) S.insStack.push(t); }
+  const [title, body] = inspectBody(t);
+  $("#insTitle").textContent = title;
+  $("#insBody").innerHTML = body;
+  $("#insBack").hidden = S.insStack.length < 2;
+  openDrawer("inspector");
+  $$("#insBody [data-x]").forEach((b) => (b.onclick = () => {
+    const id = b.dataset.x, reason = b.dataset.reason || "Not a sales conversation";
+    edit({ op: "exclude", entity: id, reason }, (m) => { const e = m.entities.find((x) => x.id === id); if (e) e.excluded = { at: new Date().toISOString().slice(0, 10), reason, by: "founder" }; });
+  }));
+  $$("#insBody [data-undo]").forEach((b) => (b.onclick = () => {
+    const id = b.dataset.undo;
+    edit({ op: "include", entity: id }, (m) => { const e = m.entities.find((x) => x.id === id); if (e) delete e.excluded; });
+  }));
+  $$("#insBody [data-go]").forEach((b) => (b.onclick = () => inspect(JSON.parse(b.dataset.go))));
+}
+function cleanBox(ctx) {
+  return '<div class="clean">Something here is not a sales conversation, or graded wrong? Remove it with ✕, or just tell me. <div style="margin-top:8px"><button class="btn sm" data-ask="' + esc("In " + ctx + ": ") + '">Ask AI Rob to clean this</button></div></div>';
+}
+function dealRow(e, extra) {
+  return '<div class="deal"><div class="n"><span class="gdot" style="background:' + gradeColor(e.pull) + '" title="' + esc(gradeName(e.pull)) + '"></span><button data-deal="' + esc(e.id) + '">' + esc(e.name || e.id) + (e.company ? ' <span class="faint">' + esc(e.company) + "</span>" : "") + '</button></div><div class="x"><button class="xbtn" data-x="' + esc(e.id) + '" title="Remove from your data (you can undo)" aria-label="Remove ' + esc(e.name || e.id) + '">✕</button></div><div class="m">' + [gradeName(e.pull), e.channel, e.owner, extra].filter(Boolean).map(esc).join(" · ") + "</div></div>";
+}
+function stageDeals(stageId) {
+  const P = S.P, idx = P.idx[stageId];
+  const got = S.ents.filter((e) => e.maxIdx >= idx);
+  const here = got.filter((e) => e.maxIdx === idx);
+  return { moved: got.filter((e) => e.maxIdx > idx), lost: here.filter((e) => e.lost), stalled: here.filter((e) => e.stalled), open: here.filter((e) => e.open), all: got };
+}
+function inspectBody(t) {
+  const a = S.a, m = M();
+  if (t.kind === "excluded") {
+    return ["Removed from your data", (a.excluded.length ? a.excluded.map((e) => '<div class="deal"><div class="n">' + esc(e.name || e.id) + (e.company ? ' <span class="faint" style="margin-left:6px">' + esc(e.company) + "</span>" : "") + '</div><div class="x"><button class="btn sm" data-undo="' + esc(e.id) + '">Undo</button></div><div class="m">' + esc([e.reason, e.at].filter(Boolean).join(" · ")) + "</div></div>").join("") : '<p class="muted">Nothing removed.</p>') + '<p class="muted" style="font-size:12px;margin-top:12px">Removed records stay in factory.json, so a refresh never brings them back. Undo any time.</p>'];
+  }
+  if (t.kind === "hopper" || (t.kind === "std" && t.id === "caseStudy")) {
+    const cs = a.caseStudies, g = a.gtmStrategy, rep = a.standards.find((x) => x.id === "caseStudy");
+    let h = '<p class="muted" style="margin-top:0">The case study is what flows into the factory: the situation where it would be weird not to buy. Standard: one archetype that has repeated 3 times (bought and hit X). <span class="pill ' + rep.status + '">' + (rep.status === "pass" ? "✓ " : "✗ ") + esc(rep.note) + "</span></p>";
+    if (!cs.length) h += '<p class="muted">No archetype written yet. <button class="link" data-ask="Who has extreme PULL? Draft my archetypal case study from my calls." data-send>Ask AI Rob to draft one</button></p>';
+    for (const c of cs) {
+      const p = c.pull || {};
+      const order = { succeeded: 0, customer: 1, prospect: 2, stalled: 3, lost: 4, unknown: 5 };
+      const fits = c.fits.slice().sort((x, y) => order[x.status] - order[y.status]);
+      const who = caseHero(c);
+      h += '<div class="arch"><div class="doc"><div class="doc-h"><span class="ava">' + esc(who.initials) + '</span><div><div class="doc-t">Case Study</div><div class="muted" style="font-size:12px">' + esc(c.name) + ' <span class="tag ' + esc(c.status || "") + '">' + esc(c.status || "archetype") + "</span></div></div></div>"
+        + '<h4>Demand</h4><div class="doc-s">What ' + esc(who.name) + ' was trying to accomplish</div><dl class="kv"><dt>Project</dt><dd>' + csField(p.project) + "</dd><dt>Unavoidable</dt><dd>" + csField(p.unavoidable) + "</dd><dt>Options</dt><dd>" + csField(p.options) + "</dd><dt>Limitations</dt><dd>" + csField(p.limitations) + "</dd></dl>"
+        + '<h4>Supply</h4><div class="doc-s">How we helped ' + esc(who.name) + ' accomplish it</div><dl class="kv"><dt>What we did</dt><dd>' + esc(c.supply) + "</dd><dt>Unblocked life</dt><dd>" + esc(c.unblockedLife) + "</dd>" + (c.pricing ? "<dt>Price</dt><dd>" + esc(c.pricing) + "</dd>" : "") + "</dl></div>"
+        + (c.note ? '<p style="font-size:13px;margin:10px 0 0"><strong>Common vs. specific:</strong> <span class="muted">' + esc(c.note) + "</span></p>" : "")
+        + (c.whoToTarget ? '<p style="font-size:13px;margin:10px 0 0"><strong>Who to target:</strong> <span class="muted">' + esc(c.whoToTarget) + "</span></p>" : "")
+        + '<div class="grp-title">Examples: ' + c.counts.succeeded + " hit X, " + c.counts.customers + " customers, " + c.counts.fits + " fit</div>"
+        + fits.slice(0, 40).map((f) => dealRow({ id: f.entity, name: f.name, company: f.company, pull: f.pull }, f.status + (f.grade ? ", " + f.grade + " fit" : "") + (f.u ? ", U: " + f.u : ""))).join("") + "</div>";
+    }
+    if (g && g.sections) h += '<div class="grp-title" style="margin-top:20px">How this factory works (GTM strategy)</div>' + g.sections.map((s) => '<div style="margin:8px 0"><strong>' + esc(s.title) + '</strong><div class="muted" style="font-size:13px">' + esc(s.body) + "</div></div>").join("");
+    return ["Case study: the input", h + cleanBox("my case studies")];
+  }
+  if (t.kind === "output" || (t.kind === "std" && t.id === "successRate")) {
+    const std = a.standards.find((x) => x.id === "successRate");
+    const d = stageDeals(m.close);
+    const hit = d.all.filter((e) => e.reachedAt[m.success]);
+    const pending = d.all.filter((e) => !e.reachedAt[m.success] && e.reachedAt[m.close] && (new Date(a.asOf) - new Date(e.reachedAt[m.close])) / 864e5 <= a.bars.successWithinDays);
+    const missed = d.all.filter((e) => !hit.includes(e) && !pending.includes(e));
+    let h = '<div class="ins-kpis"><div><b>' + F.num(a.baseline.retainedPerWeek) + '</b><span>retained a week</span></div><div><b>' + F.pct(std.value) + '</b><span>success rate, bar ' + F.pct(std.bar) + '</span></div><div><b>' + hit.length + "</b><span>hit " + esc(short(nm(m.success), 18)) + "</span></div></div>";
+    h += group("Hit X", hit, (e) => "hit X " + e.reachedAt[m.success]) + group("Waiting (inside the first month)", pending, (e) => "closed " + e.reachedAt[m.close]) + group("Did not hit X in time", missed, (e) => "closed " + (e.reachedAt[m.close] || ""));
+    return ["Delivery: retained customers", h + cleanBox("my customers")];
+  }
+  if (t.kind === "deal") {
+    const e = (S.model.entities || []).find((x) => x.id === t.id);
+    if (!e) return ["Deal", '<p class="muted">Not found.</p>'];
+    const ts = (a.tasks || []).filter((x) => x.entity === e.id);
+    let h = '<div class="row"><span class="gdot" style="background:' + gradeColor(e.pull) + '"></span><strong>' + esc(gradeName(e.pull)) + "</strong>" + (e.company ? '<span class="muted">' + esc(e.company) + "</span>" : "") + "</div>";
+    if (e.pullEvidence) h += '<p style="color:var(--ink-2)">"' + esc(e.pullEvidence) + '"</p>';
+    h += '<dl class="kv">' + [["Title", e.title], ["Channel", e.channel], ["Seller", e.owner], ["Case study", e.caseStudy], ["Effort", e.effort ? e.effort.meetings + " meetings, " + e.effort.hours + "h, " + e.effort.touches + " touches" : null], ["Exit", e.exit ? e.exit.at + ": " + (e.exit.reason || "") : null]].filter((x) => x[1]).map((x) => "<dt>" + x[0] + "</dt><dd>" + esc(x[1]) + "</dd>").join("") + "</dl>";
+    h += '<div class="grp-title">Stages cleared</div><div class="blocks">' + (e.events || []).map((v) => '<div class="block"><span class="t">' + esc(v.at) + '</span><span class="d"></span><div>' + esc(nm(v.stage)) + "</div></div>").join("") + "</div>";
+    if (ts.length) h += '<div class="grp-title">Tasks</div><div class="tasks">' + taskRows(ts) + "</div>";
+    if ((e.sources || []).length) h += '<div class="grp-title">Sources</div>' + e.sources.map((s) => '<div><a href="' + esc(s) + '" target="_blank" rel="noopener" style="font-size:12px">' + esc(s) + "</a></div>").join("");
+    h += '<div class="row" style="margin-top:16px"><button class="btn sm" data-ask="' + esc("Run an extreme deal review on " + e.name + (e.company ? " at " + e.company : "") + ".") + '" data-send>Extreme deal review</button><button class="btn sm" data-ask="' + esc("Regrade " + e.name + (e.company ? " at " + e.company : "") + ": ") + '">Regrade or fix</button>'
+      + (e.excluded ? '<button class="btn sm" data-undo="' + esc(e.id) + '">Restore</button>' : '<button class="btn sm" data-x="' + esc(e.id) + '">Remove from data</button>') + "</div>";
+    return [e.name || e.id, h];
+  }
+  // a standard or a station
+  let stageId = t.stage, std = null;
+  if (t.kind === "std") { std = a.standards.find((x) => x.id === t.id); stageId = m[STD_STAGE[t.id]]; }
+  const sIdx = a.stages.findIndex((s) => s.id === stageId);
+  const stage = a.stages[sIdx], next = a.stages[sIdx + 1];
+  let h = "";
+  if (std) { const [v, bar] = stdValue(std); h += '<div class="row"><span class="pill ' + std.status + '">' + (std.status === "pass" ? "✓ Pass" : std.status === "miss" ? "✗ Miss" : "? Unknown") + '</span><strong style="font-size:18px">' + esc(v) + '</strong><span class="muted">' + esc(bar) + "</span></div>"; }
+  const step = a.funnel.steps.find((s) => s.from === stageId);
+  const agg = (a.funnel.stages.find((s) => s.id === stageId) || {}).aggregate;
+  if (agg) {
+    const rows = (S.model.pipelineCounts || []).slice(-24).reverse();
+    h += '<p class="muted">Outreach is counted in aggregate, week by week, per channel.</p><table><thead><tr><th>Week</th><th>Channel</th>' + Object.keys((rows[0] || {}).counts || {}).map((k) => "<th class=r>" + esc(nm(k)) + "</th>").join("") + "</tr></thead><tbody>" + rows.map((r) => "<tr><td>" + esc(r.week) + "</td><td>" + esc(r.channel || "") + "</td>" + Object.values(r.counts || {}).map((n) => "<td class=r>" + n + "</td>").join("") + "</tr>").join("") + "</tbody></table>";
+    return [stage.name, h + cleanBox("my outreach counts")];
+  }
+  const d = stageDeals(stageId);
+  const dur = a.durations.find((x) => x.from === stageId);
+  h += '<div class="ins-kpis"><div><b>' + d.all.length + '</b><span>reached ' + esc(short(stage.name, 18)) + "</span></div><div><b>" + (step && step.conv != null ? F.pct(step.conv) : "—") + "</b><span>continue" + (next ? " to " + esc(short(next.name, 14)) : "") + "</span></div><div><b>" + (dur && dur.median != null ? Math.round(dur.median) + "d" : "—") + "</b><span>median to next</span></div></div>";
+  if (stageId === m.inflow) h += inflowMini() + capacityMini();
+  const cycle = t.id === "cycleTime";
+  const extra = (e) => cycle && e.reachedAt[m.pull] && e.reachedAt[m.close] ? Math.round((new Date(e.reachedAt[m.close]) - new Date(e.reachedAt[m.pull])) / 864e5) + " days PULL to signed" : (e.reachedAt[stageId] || "");
+  // at the first meeting, a no-PULL deal has dropped off the main line even if a seller kept pushing it
+  const pushed = stageId === m.inflow ? d.moved.filter((e) => e.pull === "no" && !e.reachedAt[m.pull]) : [];
+  if (next) h += group("Moved on to " + next.name, d.moved.filter((e) => !pushed.includes(e)), extra, true);
+  h += group(stageId === m.inflow ? "Dropped here (no PULL or lost)" : "Lost here", d.lost.concat(pushed), (e) => (e.exit && e.exit.reason) || (pushed.includes(e) ? "pushed on anyway" : ""))
+    + group("Stalled here (no movement in " + ((S.model.settings || {}).staleDays || 45) + " days)", d.stalled, (e) => "last moved " + (e.lastAt || ""))
+    + group("Open here", d.open, (e) => e.reachedAt[stageId] || "");
+  return [(std ? std.label : stage.name), h + cleanBox(stage.name.toLowerCase())];
+}
+function group(title, xs, extra, collapsed) {
+  if (!xs.length) return "";
+  const rows = xs.slice().sort((p, q) => String(q.lastAt || "").localeCompare(String(p.lastAt || ""))).map((e) => dealRow(e, extra(e))).join("");
+  return collapsed ? '<details><summary class="grp-title" style="display:list-item">' + esc(title) + " · " + xs.length + "</summary>" + rows + "</details>" : '<div class="grp-title">' + esc(title) + " · " + xs.length + "</div>" + rows;
+}
+function inflowMini() {
+  const inf = S.a.inflow, W = 420, H = 110, L = 22, B = 18;
+  const max = Math.max(inf.bar * 1.15, ...inf.weeks.map((w) => w.total), 1), bw = (W - L) / inf.weeks.length;
+  const Y = (v) => 6 + (1 - v / max) * (H - 6 - B);
+  let svg = "";
+  inf.weeks.forEach((w, i) => { svg += '<rect x="' + (L + i * bw + 2) + '" y="' + Y(w.total) + '" width="' + Math.max(3, bw - 4) + '" height="' + (Y(0) - Y(w.total)) + '" rx="2" fill="var(--c-base)"' + (w.partial ? ' opacity=".4"' : "") + ' data-tip="' + esc("Week of " + w.week + (w.partial ? " (in progress)" : "") + ": " + w.total) + '"/>'; if (i % 3 === 0) svg += '<text x="' + (L + i * bw + bw / 2) + '" y="' + (H - 4) + '" text-anchor="middle" style="font-size:9px">' + w.week.slice(5) + "</text>"; });
+  svg += '<line x1="' + L + '" x2="' + W + '" y1="' + Y(inf.bar) + '" y2="' + Y(inf.bar) + '" stroke="var(--ink-2)" stroke-dasharray="4 3"/><text x="' + (W - 2) + '" y="' + (Y(inf.bar) - 4) + '" text-anchor="end" style="font-size:10px" class="ink2">bar ' + inf.bar + "/wk</text>";
+  return '<div class="grp-title">First meetings a week · average ' + F.num(inf.avgPerWeek) + '</div><svg viewBox="0 0 ' + W + " " + H + '" style="width:100%;height:auto" role="img" aria-label="First meetings per week">' + svg + "</svg>";
+}
+function capacityMini() {
+  const c = S.a.capacity;
+  if (!c) return '<p class="muted" style="font-size:12px">No calendar connected, so I cannot see your selling hours.</p>';
+  return '<div class="grp-title">Calendar capacity · ' + F.pct(c.utilization) + " full</div>" + c.sellers.map((s) => '<div style="font-size:12px;margin:6px 0"><div class="row"><strong>' + esc(s.owner) + '</strong><span class="spacer"></span><span class="muted">' + F.num(s.booked) + "h of " + F.num(s.sellingHours) + 'h selling time</span></div><div style="height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden;margin-top:3px"><span style="display:block;height:100%;width:' + Math.min(100, (s.utilization || 0) * 100) + '%;background:var(--c-base)"></span></div></div>').join("")
+    + '<p class="muted" style="font-size:12px">Full calendars hold about ' + F.num(c.maxDealsPerWeek) + " new deals a week at today's mix" + (c.maxDealsPerWeekExtreme ? ", " + F.num(c.maxDealsPerWeekExtreme) + " if they were all extreme PULL" : "") + ".</p>";
+}
+
+// ---------- what can AI Rob do ----------
+const USES = [
+  ["Review a sales call", "Paste a transcript: did they have PULL, and what to change.", "Review this sales call: ", ["sales", "pull"]],
+  ["Extreme deal review", "Status, the next action, and the full playbook to close one deal.", "Run an extreme deal review on ", ["sales"]],
+  ["Where is this deal stuck?", "Diagnose one opportunity across its calls and emails.", "Is this deal alive? Here are the calls and emails: ", ["sales"]],
+  ["Prep my next call", "A run of show, plus a recap the champion can forward.", "Help me plan my second call with ", ["sales"]],
+  ["Write the follow-up", "A recap email built from the call review.", "Write the follow-up email for my call with ", ["sales"]],
+  ["Plan a demand sprint", "Who to target next, and whether to pivot or persist.", "Plan my next demand sprint. Here's what happened: ", ["pull", "gate", "pipeline"]],
+  ["Stress test who I target", "Is your PULL hypothesis weird not to buy?", "Stress test this PULL hypothesis: ", ["pull", "gate"]],
+  ["Write or roast outbound", "A message that sells the conversation, not the product.", "Roast this outbound message: ", ["pipeline", "pull"]],
+  ["Write my call script", "A talk track built from your own calls.", "Write my call script.", ["sales", "pull"]],
+  ["Price it", "Price against the buyer's real options.", "How should I price this? ", ["sales"]],
+  ["Pilots and POCs", "When to say yes, and how to run one that closes.", "A prospect wants a pilot. What do I do? ", ["sales"]],
+  ["Post-sale plan", "Kickoff and onboarding that gets customers to X.", "Create a post-sales plan for ", ["delivery"]],
+  ["Roast my landing page", "Positioning built on the case study.", "Roast my landing page: ", ["pull"]],
+  ["Roast my LinkedIn profile", "Why connection requests don't land.", "Roast my LinkedIn profile: ", ["pipeline"]],
+];
+function renderUses() {
+  const area = bnTarget().area;
+  const top = USES.filter((u) => u[3].includes(area)).slice(0, 3);
+  const rest = USES.filter((u) => !top.includes(u));
+  const card = (u) => '<button class="use" data-ask="' + esc(u[2]) + '"><b>' + esc(u[0]) + "</b><span>" + esc(u[1]) + "</span></button>";
+  $("#usesBody").innerHTML = (top.length ? '<div class="eyebrow">Suggested for your bottleneck</div>' + top.map(card).join("") + '<div class="eyebrow" style="margin-top:18px">Everything else</div>' : "") + rest.map(card).join("")
+    + '<p class="muted" style="font-size:12px;margin-top:16px">Each one opens the chat with a starter. Add your transcript, deal or draft, then send.</p>';
+}
+$("#usesBtn").onclick = () => { renderUses(); openDrawer("uses"); };
+
+// ---------- tooltip ----------
+const tip = $("#tip");
+function showTip(e, text) { tip.textContent = text; tip.style.opacity = 1; const x = Math.min(window.innerWidth - tip.offsetWidth - 8, e.clientX + 12); tip.style.left = x + "px"; tip.style.top = Math.max(8, e.clientY - tip.offsetHeight - 10) + "px"; }
+function hideTip() { tip.style.opacity = 0; }
+document.addEventListener("mousemove", (e) => { const t = e.target.closest && e.target.closest("[data-tip]"); if (t) showTip(e, t.getAttribute("data-tip")); else if (e.target.id !== "hit") hideTip(); });
+
+// ---------- data quality ----------
+$("#dqBadge").onclick = () => {
+  openChat();
+  addMsg("sys", "Data notes");
+  addMsg("ai", S.a.dataQuality.map((q) => "• " + q.message + (q.fix ? " " + q.fix : "")).join("\n"));
+};
+
+// ---------- refresh ----------
+$("#refreshBtn").onclick = async () => {
+  const b = $("#refreshBtn"); b.disabled = true; b.textContent = "Refreshing…";
+  try {
+    const r = await fetch("/api/refresh", { method: "POST", headers: { "Content-Type": "application/json" } }).then((x) => x.json());
+    if (!r.ok) { openChat(); addMsg("sys", "Refresh failed"); addMsg("ai", r.output || "No output"); }
+    else if (r.validation && !r.validation.ok) { openChat(); addMsg("ai", "The refresh wrote a model with errors:\n" + r.validation.errors.join("\n")); }
+    await load();
+  } finally { b.disabled = !S.config.canRefresh; b.textContent = "↻ Refresh"; }
+};
+
+// ---------- chat ----------
+const CHAT_SUGS = ["What should I do about the bottleneck today?", "Who has extreme PULL?", "Why is this the bottleneck and not close rate?", "Remove the internal meetings from my first meetings"];
+function openChat(prefill, sendNow) {
+  openDrawer("chat");
+  if (!$("#msgs").children.length) intro();
+  if (prefill != null) { $("#q").value = prefill; if (sendNow) return send(); }
+  setTimeout(() => { const q = $("#q"); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }, 50);
+}
+function intro() {
+  addMsg("ai", S.config.canChat ? "Ask me anything about your GTM, run a what-if, or tell me to change something (\"merge these case studies\", \"Jordan has 25 selling hours\", \"remove the recruiting calls\")." : "Chat needs your agent wired in (chatCommand in config.json). Ask AI Rob in your Claude or Codex session to \"set up AI Rob\". You can still run simulations with the dials at the top.");
+  $("#chatSugs").innerHTML = CHAT_SUGS.map((s) => "<button>" + esc(s) + "</button>").join("");
+  $$("#chatSugs button").forEach((b) => (b.onclick = () => { $("#q").value = b.textContent; send(); }));
+}
+function addMsg(who, text) { const d = document.createElement("div"); d.className = "msg " + who; d.textContent = text; $("#msgs").appendChild(d); $("#msgs").scrollTop = 1e9; return d; }
+$("#chatBtn").onclick = () => openChat();
+$("#composer").onsubmit = (e) => { e.preventDefault(); send(); };
+$("#q").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } });
+async function send() {
+  const q = $("#q").value.trim();
+  if (!q) return;
+  $("#q").value = ""; $("#chatSugs").innerHTML = "";
+  addMsg("me", q);
+  if (!S.config.canChat) { addMsg("ai", "Chat is not wired up yet. In your Claude or Codex session, say \"set up AI Rob\"."); return; }
+  const wait = addMsg("sys", "AI Rob is working on it…");
+  $("#send").disabled = true;
+  try {
+    const context = S.insStack.length ? S.insStack[S.insStack.length - 1] : null;
+    const r = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: q, history: S.chat, filters: S.filters, context }) }).then((x) => x.json());
+    wait.remove();
+    addMsg("ai", r.answer || "(no answer)");
+    S.chat.push({ role: "user", text: q }, { role: "assistant", text: r.answer || "" });
+    if (r.modelChanged) { addMsg("sys", "Model updated" + (r.version ? "; previous version saved as " + r.version : "")); if (r.validation && !r.validation.ok) addMsg("ai", "Heads up. That change has errors:\n" + r.validation.errors.join("\n")); await load(); }
+    if (r.scenario) { S.scenario = r.scenario; render(); addMsg("sys", "Simulation loaded at the top of the page"); }
+    if (r.view && VIEWS.some((v) => v[0] === r.view)) { S.view = r.view; renderFactory(); }
+    if (r.inspect) inspect(r.inspect);
+  } catch (e) { wait.remove(); addMsg("ai", "Could not reach the server: " + e.message); }
+  finally { $("#send").disabled = false; }
+}
+
+// ---------- theme ----------
+(function () {
+  const t = store.get("theme", null);
+  if (t) document.documentElement.setAttribute("data-theme", t);
+  $("#themeBtn").onclick = () => {
+    const cur = document.documentElement.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const next = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next); store.set("theme", next);
+  };
+})();
+
+load();
+</script>
+</body>
+</html>

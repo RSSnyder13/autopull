@@ -1,0 +1,29 @@
+{
+  "port": 4747,
+  "model": "factory.json",
+  "versionsDir": "versions",
+  "dashboardUrl": "http://localhost:4747",
+  "agent": "claude",
+  "refreshCommand": "claude -p \"$(cat prompts/refresh.md)\" --permission-mode acceptEdits",
+  "chatCommand": "claude -p \"$(cat prompts/chat.md)\" --permission-mode acceptEdits",
+  "notifyCommand": "node scripts/notify-desktop.js",
+  "examples": {
+    "codex": {
+      "refreshCommand": "codex exec --full-auto \"$(cat prompts/refresh.md)\"",
+      "chatCommand": "codex exec --full-auto \"$(cat prompts/chat.md)\""
+    },
+    "notify": {
+      "desktop": "node scripts/notify-desktop.js",
+      "slack": "SLACK_WEBHOOK_URL=https://hooks.slack.com/services/XXX node scripts/notify-slack.js",
+      "email via your agent": "claude -p \"Email me the brief in $FACTORY_BRIEF_FILE using the Gmail connector. Subject: Path to $100M brief.\"",
+      "schedule (cron, weekdays 7:15am)": "15 7 * * 1-5 cd /path/to/factory && node cli.js daily",
+      "dealReviews": { "mode": "extreme", "lastRunAt": null }
+    }
+  },
+  "setup": {
+    "sources": [],
+    "dealReviews": null,
+    "schedule": null,
+    "notify": null
+  }
+}

@@ -1,0 +1,6204 @@
+{
+ "schema": 1,
+ "generatedAt": "2026-10-05T07:00:00Z",
+ "asOf": "2026-10-05",
+ "goal": {
+  "kind": "arr",
+  "target": 100000000
+ },
+ "company": {
+  "name": "Tallyhook (sample)",
+  "product": "Audit-prep workspace for lean finance teams",
+  "acv": 40000,
+  "band": "moderate",
+  "arr": 1150000,
+  "annualChurn": 0.08,
+  "sellers": [
+   "Maya (founder)",
+   "Jordan (AE)"
+  ]
+ },
+ "milestones": {
+  "inflow": "met",
+  "pull": "pull",
+  "close": "closed",
+  "success": "indicator"
+ },
+ "stages": [
+  {
+   "id": "reached",
+   "name": "Reached out",
+   "machine": "pipeline"
+  },
+  {
+   "id": "replied",
+   "name": "Replied",
+   "machine": "pipeline"
+  },
+  {
+   "id": "booked",
+   "name": "Meeting booked",
+   "machine": "pipeline"
+  },
+  {
+   "id": "met",
+   "name": "First conversation",
+   "machine": "sales"
+  },
+  {
+   "id": "pull",
+   "name": "PULL",
+   "machine": "sales"
+  },
+  {
+   "id": "conceptual",
+   "name": "Conceptual fit",
+   "machine": "sales"
+  },
+  {
+   "id": "detailed",
+   "name": "Detailed fit",
+   "machine": "sales"
+  },
+  {
+   "id": "planning",
+   "name": "Project planning",
+   "machine": "sales"
+  },
+  {
+   "id": "closed",
+   "name": "Closed",
+   "machine": "sales"
+  },
+  {
+   "id": "indicator",
+   "name": "Hit X: first audit passed on the workspace",
+   "machine": "delivery"
+  },
+  {
+   "id": "renewed",
+   "name": "Renewed",
+   "machine": "delivery"
+  }
+ ],
+ "caseStudies": [
+  {
+   "id": "first-audit",
+   "name": "The first-audit controller",
+   "status": "repeatable",
+   "pull": {
+    "project": "Get through the company's first financial audit on time, so the sponsor, the lender or the next raise gets the audited numbers it is waiting on.",
+    "unavoidable": [
+     "Sponsor deadline: the PE sponsor set a date for audited financials.",
+     "Lender covenant: the credit agreement requires audited statements by a fixed date.",
+     "Fundraise or sale: the data room needs audited numbers before it opens.",
+     "Unknown, inferred from behavior: they bought and loaded the auditors' list in the first week."
+    ],
+    "options": [
+     "Outside help (big-four advisory, temps): too expensive or too slow to start, and they don't know the business.",
+     "Doing it in house (spreadsheets, shared drives): can't show auditors a clean trail in time."
+    ],
+    "limitations": "Every option leaves the controller as the bottleneck for every auditor request."
+   },
+   "note": "All of them face a first audit with a small finance team and a date someone else set. What differs is who set the date: the sponsor, the lender, or a raise.",
+   "supply": "A workspace that turns the auditors' request list into owned tasks, with evidence attached and a live status the auditors can see.",
+   "unblockedLife": "Fieldwork starts on time, auditors self-serve evidence, and the controller stops being the bottleneck for every request.",
+   "pricing": "$40k a year, priced against one advisory engagement, signed before fieldwork starts.",
+   "extremeProfile": "Controller or VP Finance at a PE-backed company, 50 to 300 employees, first audit with fieldwork under 90 days out, finance team of three or fewer.",
+   "whoToTarget": "Portfolio companies acquired by PE in the last 12 months; ask sponsors' operating partners for intros.",
+   "market": {
+    "accounts": 4200,
+    "note": "US PE-backed companies in their first audit year (rough estimate)"
+   },
+   "fits": [
+    {
+     "entity": "d001",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "d007",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "d008",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "d012",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "d016",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "d017",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "d018",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "d024",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "d026",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "d033",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "d039",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "d040",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "d046",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "d054",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "d060",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "d063",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "d066",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "d068",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "d073",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "d081",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "d082",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "d089",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "d105",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "d115",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "d116",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "d121",
+     "grade": "strong",
+     "evidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "c001",
+     "grade": "strong",
+     "evidence": "First audit forced by a PE sponsor; deadline set by the auditors.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "c002",
+     "grade": "strong",
+     "evidence": "First audit forced by a PE sponsor; deadline set by the auditors.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "c003",
+     "grade": "strong",
+     "evidence": "First audit forced by a PE sponsor; deadline set by the auditors.",
+     "u": "lender covenant"
+    },
+    {
+     "entity": "c004",
+     "grade": "strong",
+     "evidence": "First audit forced by a PE sponsor; deadline set by the auditors.",
+     "u": "fundraise or sale"
+    },
+    {
+     "entity": "c005",
+     "grade": "strong",
+     "evidence": "First audit forced by a PE sponsor; deadline set by the auditors.",
+     "u": "sponsor deadline"
+    },
+    {
+     "entity": "c006",
+     "grade": "strong",
+     "evidence": "First audit forced by a PE sponsor; deadline set by the auditors.",
+     "u": "lender covenant"
+    }
+   ]
+  },
+  {
+   "id": "fractional-cfo",
+   "name": "The fractional CFO juggling audits",
+   "status": "hypothesis",
+   "pull": {
+    "project": "Run audit prep for several clients at once.",
+    "unavoidable": "Unclear. Audits are client-driven and often not yet scheduled.",
+    "options": "Their own templates, or the client's staff.",
+    "limitations": "Templates break across clients, but most say it is manageable."
+   },
+   "supply": "Same workspace, multi-client.",
+   "unblockedLife": "One place to run every client's audit.",
+   "pricing": "Untested.",
+   "extremeProfile": "Fractional CFO with three or more clients in an audit year at the same time.",
+   "whoToTarget": "Not yet: the unavoidable part is missing in most calls.",
+   "market": {
+    "accounts": null,
+    "note": "Unknown"
+   },
+   "fits": [
+    {
+     "entity": "d010",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets."
+    },
+    {
+     "entity": "d015",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d019",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d023",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d025",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d030",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d038",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets."
+    },
+    {
+     "entity": "d043",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d048",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets."
+    },
+    {
+     "entity": "d050",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d055",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d056",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d061",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d064",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d067",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d070",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d072",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets."
+    },
+    {
+     "entity": "d077",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets."
+    },
+    {
+     "entity": "d094",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d101",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets."
+    },
+    {
+     "entity": "d103",
+     "grade": "partial",
+     "evidence": "Audit this year, no firm date yet; current close process is spreadsheets."
+    },
+    {
+     "entity": "d104",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d107",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d108",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    },
+    {
+     "entity": "d122",
+     "grade": "weak",
+     "evidence": "Exploring; no audit on the calendar."
+    }
+   ]
+  }
+ ],
+ "gtmStrategy": {
+  "updatedAt": "2026-10-05",
+  "sections": [
+   {
+    "id": "target",
+    "title": "Who we target and why",
+    "body": "Controllers at PE-backed companies facing their first audit within 90 days. The sponsor's deadline makes the project unavoidable, and the alternatives are too slow or too expensive, so it would be weird for them not to buy.",
+    "refs": [
+     "caseStudies"
+    ]
+   },
+   {
+    "id": "reach",
+    "title": "How we reach them",
+    "body": "Referrals from PE operating partners and LinkedIn to controllers at recently acquired companies. Outreach sells the conversation, not the product: one line about their audit date and a question.",
+    "refs": [
+     "inflow",
+     "sankey"
+    ]
+   },
+   {
+    "id": "sales",
+    "title": "How a deal moves",
+    "body": "Call 1 finds the PULL (the audit date and the request list). Conceptual fit is a walkthrough on their own list. Detailed fit is their auditor's questions. Project planning works backward from fieldwork. Sign before fieldwork.",
+    "refs": [
+     "timeline",
+     "sankey"
+    ]
+   },
+   {
+    "id": "delivery",
+    "title": "How customers succeed",
+    "body": "X is passing the first audit on the workspace. Onboarding loads the request list in the kickoff call and gets the auditors logged in during week one.",
+    "refs": [
+     "sankey"
+    ]
+   },
+   {
+    "id": "pricing",
+    "title": "Pricing",
+    "body": "$40k a year, anchored to one advisory engagement, signed before fieldwork.",
+    "refs": [
+     "caseStudies"
+    ]
+   },
+   {
+    "id": "bet",
+    "title": "Current bottleneck and the bet",
+    "body": "Most first meetings have no audit on the calendar, and a third of selling hours sit empty. The bet: fill those hours with operating-partner intros and PE CFO events, where meetings already pull. Stop booking anyone without an audit date.",
+    "refs": [
+     "pull",
+     "levers",
+     "capacity"
+    ]
+   }
+  ]
+ },
+ "coaching": {
+  "generatedAt": "2026-10-05T07:00:00Z",
+  "bottleneckId": "step:met>pull",
+  "headline": "Most of your first meetings have no audit on the calendar. That is the whole problem.",
+  "move": "Retarget. The order I want: first, controllers at PE-backed companies with fieldwork under 90 days out. Then anyone with an audit date this year. Nobody else gets a meeting. Your referral meetings already pull at over 60%. Cold email meetings almost never do, and those deals almost never close. It would be weird for a controller with fieldwork in 60 days to ignore you.",
+  "today": "Before your 11:00, message the three operating partners who sent you your last extreme-PULL customers. Say: \"[Customer] got through their first audit on time with us. Who else in your portfolio has fieldwork this quarter? Two intros would be huge.\"",
+  "ladder": [
+   "DM 30 controllers at companies PE bought in the last 12 months. One question: when does fieldwork start?",
+   "Still stuck? Go to the PE CFO events this month and work the floor.",
+   "Still stuck? Ask your current customers' sponsors to send one intro email to the whole portfolio."
+  ],
+  "why": "Targeting beats every sales fix you could make. PULL deals close at many times the rate of everything else, faster, with a fraction of the seller hours. And a third of your selling hours are empty. Fill them with the same people."
+ },
+ "tasks": [
+  {
+   "id": "t-bn-1",
+   "title": "Ask the three operating partners for two intros each to controllers with an audit this quarter",
+   "why": "Targeting is the bottleneck, and referral meetings already pull at over 60%.",
+   "source": "coaching",
+   "bottleneck": true,
+   "due": "2026-10-05",
+   "done": false
+  },
+  {
+   "id": "t-bn-2",
+   "title": "Requalify this week's cold email meetings: keep only the ones with an audit date",
+   "why": "No audit date, no PULL. Those deals almost never close.",
+   "source": "coaching",
+   "bottleneck": true,
+   "due": "2026-10-05",
+   "done": false
+  },
+  {
+   "id": "t-dr-d121",
+   "title": "Send the auditor-questions doc and book the detailed-fit call with their auditor on it",
+   "why": "Extreme deal review: extreme PULL, stage detailed. First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "source": "deal-review",
+   "entity": "d121",
+   "bottleneck": false,
+   "due": "2026-10-06",
+   "done": false,
+   "link": "deals/orchard-lane-cafes/Close.md"
+  },
+  {
+   "id": "t-dr-d101",
+   "title": "Get their auditor's questions and book detailed fit",
+   "why": "Extreme deal review: PULL, stage conceptual. Audit this year, no firm date yet; current close process is spreadsheets.",
+   "source": "deal-review",
+   "entity": "d101",
+   "bottleneck": false,
+   "due": "2026-10-07",
+   "done": false,
+   "link": "deals/fairhaven-pet/Close.md"
+  },
+  {
+   "id": "t-dr-d103",
+   "title": "Get their auditor's questions and book detailed fit",
+   "why": "Extreme deal review: PULL, stage conceptual. Audit this year, no firm date yet; current close process is spreadsheets.",
+   "source": "deal-review",
+   "entity": "d103",
+   "bottleneck": false,
+   "due": "2026-10-08",
+   "done": false,
+   "link": "deals/marlow-kitchens/Close.md"
+  },
+  {
+   "id": "t-done-1",
+   "title": "Log last week's conference touches",
+   "source": "founder",
+   "bottleneck": false,
+   "due": "2026-10-03",
+   "done": true,
+   "doneAt": "2026-10-03"
+  }
+ ],
+ "plan": {
+  "date": "2026-10-05",
+  "generatedAt": "2026-10-05T06:45:00Z",
+  "summary": "Bottleneck first. Two hours on targeting before your 11:00 call, before the day eats it.",
+  "blocks": [
+   {
+    "at": "08:00",
+    "until": "09:00",
+    "title": "Operating partner intro asks",
+    "why": "Bottleneck: targeting",
+    "bottleneck": true,
+    "taskIds": [
+     "t-bn-1"
+    ]
+   },
+   {
+    "at": "09:00",
+    "until": "10:00",
+    "title": "Requalify cold email meetings by audit date",
+    "why": "Bottleneck: targeting",
+    "bottleneck": true,
+    "taskIds": [
+     "t-bn-2"
+    ]
+   },
+   {
+    "at": "11:00",
+    "until": "11:45",
+    "title": "Call already on your calendar",
+    "why": "Run it to the stage's exit question",
+    "bottleneck": false
+   },
+   {
+    "at": "13:00",
+    "until": "14:00",
+    "title": "Deal review next steps",
+    "why": "From last night's deal reviews",
+    "bottleneck": false,
+    "taskIds": [
+     "t-dr-d121",
+     "t-dr-d101",
+     "t-dr-d103"
+    ]
+   }
+  ]
+ },
+ "suggestions": {
+  "generatedAt": "2026-10-05T07:00:00Z",
+  "simulations": [
+   {
+    "label": "What if we want $10M ARR by the end of 2028?",
+    "scenario": {
+     "label": "$10M ARR by Dec 2028",
+     "goal": {
+      "target": 10000000,
+      "by": "2028-12-31"
+     },
+     "why": "Today's team and rates; what it takes to get there"
+    }
+   },
+   {
+    "label": "What if we hire another AE?",
+    "scenario": {
+     "label": "+1 AE",
+     "sellersAdded": 1,
+     "hoursPerSeller": 30,
+     "fillCalendar": true,
+     "why": "A second AE with 30 selling hours, calendars full at today's mix"
+    }
+   },
+   {
+    "label": "What if we only booked first-audit controllers?",
+    "scenario": {
+     "label": "Only first-audit, calendars full",
+     "cohort": {
+      "caseStudy": "first-audit"
+     },
+     "fillCalendar": true,
+     "why": "Rates and hours per deal from first-audit deals only"
+    }
+   },
+   {
+    "label": "What if referrals were half our first meetings?"
+   }
+  ]
+ },
+ "capacity": [
+  {
+   "owner": "Maya (founder)",
+   "weeklyHours": 55,
+   "sellingHours": 20,
+   "bookedSalesHours": 14
+  },
+  {
+   "owner": "Jordan (AE)",
+   "weeklyHours": 45,
+   "sellingHours": 30,
+   "bookedSalesHours": 19
+  }
+ ],
+ "pipelineCounts": [
+  {
+   "week": "2026-06-15",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 59,
+    "replied": 8,
+    "booked": 5
+   }
+  },
+  {
+   "week": "2026-06-15",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 439,
+    "replied": 13,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-06-15",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-06-22",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 64,
+    "replied": 11,
+    "booked": 5
+   }
+  },
+  {
+   "week": "2026-06-22",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 393,
+    "replied": 12,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-06-22",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-06-29",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 57,
+    "replied": 9,
+    "booked": 5
+   }
+  },
+  {
+   "week": "2026-06-29",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 409,
+    "replied": 12,
+    "booked": 3
+   }
+  },
+  {
+   "week": "2026-06-29",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-07-06",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 69,
+    "replied": 11,
+    "booked": 4
+   }
+  },
+  {
+   "week": "2026-07-06",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 381,
+    "replied": 12,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-07-06",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 1
+   }
+  },
+  {
+   "week": "2026-07-13",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 57,
+    "replied": 9,
+    "booked": 5
+   }
+  },
+  {
+   "week": "2026-07-13",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 421,
+    "replied": 12,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-07-13",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-07-20",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 69,
+    "replied": 8,
+    "booked": 4
+   }
+  },
+  {
+   "week": "2026-07-20",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 417,
+    "replied": 10,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-07-20",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 1
+   }
+  },
+  {
+   "week": "2026-07-27",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 68,
+    "replied": 8,
+    "booked": 5
+   }
+  },
+  {
+   "week": "2026-07-27",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 440,
+    "replied": 14,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-07-27",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-08-03",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 57,
+    "replied": 8,
+    "booked": 5
+   }
+  },
+  {
+   "week": "2026-08-03",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 401,
+    "replied": 13,
+    "booked": 3
+   }
+  },
+  {
+   "week": "2026-08-03",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-08-10",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 58,
+    "replied": 9,
+    "booked": 4
+   }
+  },
+  {
+   "week": "2026-08-10",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 438,
+    "replied": 13,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-08-10",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-08-17",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 58,
+    "replied": 9,
+    "booked": 4
+   }
+  },
+  {
+   "week": "2026-08-17",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 386,
+    "replied": 11,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-08-17",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-08-24",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 57,
+    "replied": 8,
+    "booked": 4
+   }
+  },
+  {
+   "week": "2026-08-24",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 419,
+    "replied": 10,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-08-24",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 1
+   }
+  },
+  {
+   "week": "2026-08-31",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 65,
+    "replied": 10,
+    "booked": 4
+   }
+  },
+  {
+   "week": "2026-08-31",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 426,
+    "replied": 13,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-08-31",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-09-07",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 67,
+    "replied": 10,
+    "booked": 5
+   }
+  },
+  {
+   "week": "2026-09-07",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 386,
+    "replied": 12,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-09-07",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-09-14",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 56,
+    "replied": 11,
+    "booked": 5
+   }
+  },
+  {
+   "week": "2026-09-14",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 387,
+    "replied": 11,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-09-14",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-09-21",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 66,
+    "replied": 10,
+    "booked": 6
+   }
+  },
+  {
+   "week": "2026-09-21",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 402,
+    "replied": 12,
+    "booked": 3
+   }
+  },
+  {
+   "week": "2026-09-21",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  },
+  {
+   "week": "2026-09-28",
+   "channel": "LinkedIn",
+   "counts": {
+    "reached": 63,
+    "replied": 9,
+    "booked": 6
+   }
+  },
+  {
+   "week": "2026-09-28",
+   "channel": "Cold email",
+   "counts": {
+    "reached": 396,
+    "replied": 12,
+    "booked": 3
+   }
+  },
+  {
+   "week": "2026-09-28",
+   "channel": "Referral",
+   "counts": {
+    "reached": 5,
+    "replied": 3,
+    "booked": 2
+   }
+  }
+ ],
+ "levers": [
+  {
+   "id": "audit-opener",
+   "step": "reached>replied",
+   "label": "Reply rate to 8% with the audit-date opener",
+   "achievable": 0.08,
+   "why": "Rough: the audit-date opener got 4 replies from 50 sends"
+  }
+ ],
+ "entities": [
+  {
+   "id": "d001",
+   "name": "Victor K.",
+   "company": "Bluecart Retail",
+   "title": "Head of Accounting",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-12"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-16"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-06-18"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-06-24"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-04"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-07-14"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-25",
+    "reason": "Went quiet after pricing"
+   },
+   "sources": [
+    "https://recorder.example/call/d001"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 5,
+    "hours": 7.5,
+    "touches": 14
+   }
+  },
+  {
+   "id": "d002",
+   "name": "Omar Z.",
+   "company": "Harborline Logistics",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-08"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-16"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-01"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-25",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d002"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d003",
+   "name": "Marco P.",
+   "company": "Lakeshore Clinics",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-15"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-18"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-06-27"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-23",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d003"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d004",
+   "name": "Zoe E.",
+   "company": "Silverline Freight",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-09"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-17"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-06-30"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-20",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d004"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d005",
+   "name": "Ben G.",
+   "company": "Quarry Street Media",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-07"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-15"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-06-26"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-22"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-23",
+    "reason": "Could not get the approver to engage"
+   },
+   "sources": [
+    "https://recorder.example/call/d005"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.8,
+    "touches": 13
+   }
+  },
+  {
+   "id": "d006",
+   "name": "Ana V.",
+   "company": "Pinebrook Foods",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-09"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-15"
+    }
+   ],
+   "exit": {
+    "at": "2026-06-27",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d006"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d007",
+   "name": "Chloe X.",
+   "company": "Ironwood Fabrication",
+   "title": "Head of Accounting",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-13"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-17"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-06-19"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-06-25"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-08",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d007"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.5,
+    "touches": 8
+   }
+  },
+  {
+   "id": "d008",
+   "name": "Dev B.",
+   "company": "Lakeshore Clinics",
+   "title": "VP Finance",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-10"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-18"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-06-19"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-06-22"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-06-28"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-07-04"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-07-11"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-08-02"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d008"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d009",
+   "name": "Grace J.",
+   "company": "Granite Peak HVAC",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-23"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-26"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-04"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-28"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-27",
+    "reason": "Could not get the approver to engage"
+   },
+   "sources": [
+    "https://recorder.example/call/d009"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.8,
+    "touches": 13
+   }
+  },
+  {
+   "id": "d010",
+   "name": "Isla J.",
+   "company": "Granite Peak HVAC",
+   "title": "Fractional CFO",
+   "caseStudy": "fractional-cfo",
+   "pull": "yes",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-19"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-22"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-06-24"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-04"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-17"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-08-05"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-08-15"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-09-18"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d010"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 5,
+    "hours": 7.5,
+    "touches": 14
+   }
+  },
+  {
+   "id": "d011",
+   "name": "Tara L.",
+   "company": "Orchard Lane Cafes",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-19"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-26"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-13",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d011"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d012",
+   "name": "Zoe V.",
+   "company": "Harborline Logistics",
+   "title": "VP Finance",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-19"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-24"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-06-25"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-06",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d012"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d013",
+   "name": "Chloe E.",
+   "company": "Lakeshore Clinics",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-18"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-22"
+    }
+   ],
+   "exit": {
+    "at": "2026-06-30",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d013"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d014",
+   "name": "Dev L.",
+   "company": "Kestrel Robotics",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-16"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-22"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-03",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d014"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d015",
+   "name": "Tara T.",
+   "company": "Quarry Street Media",
+   "title": "CFO",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-18"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-22"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-01",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d015"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d016",
+   "name": "Elena X.",
+   "company": "Quarry Street Media",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-17"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-22"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-06-23"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-06-27"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-02"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-07-06"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-07-12"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-07-27"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d016"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d017",
+   "name": "Isla G.",
+   "company": "Fairhaven Pet",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-26"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-30"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-03"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-09"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-26"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-12",
+    "reason": "Could not get the approver to engage"
+   },
+   "sources": [
+    "https://recorder.example/call/d017"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 4,
+    "hours": 6,
+    "touches": 11
+   }
+  },
+  {
+   "id": "d018",
+   "name": "Nia S.",
+   "company": "Hollis & Pike",
+   "title": "Head of Accounting",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-21"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-29"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-01"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-11"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-22",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d018"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.5,
+    "touches": 8
+   }
+  },
+  {
+   "id": "d019",
+   "name": "Marco X.",
+   "company": "Kestrel Robotics",
+   "title": "Fractional CFO",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-26"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-03"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-20",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d019"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d020",
+   "name": "Lena L.",
+   "company": "Lakeshore Clinics",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-26"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-01"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-08"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-29",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d020"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d021",
+   "name": "Victor U.",
+   "company": "Fairhaven Pet",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-26"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-29"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-09"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-31"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-08-24"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-09-06"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d021"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 5,
+    "hours": 8,
+    "touches": 22
+   }
+  },
+  {
+   "id": "d022",
+   "name": "Uma W.",
+   "company": "Harborline Logistics",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Conference",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-22"
+    },
+    {
+     "stage": "met",
+     "at": "2026-06-30"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-15",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d022"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d023",
+   "name": "Omar V.",
+   "company": "Lakeshore Clinics",
+   "title": "CFO",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-27"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-03"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-13"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-05",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d023"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d024",
+   "name": "Elena K.",
+   "company": "Summit Ridge Labs",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-25"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-03"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-05"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-17"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-26"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-08-15"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-08-29"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-09-22"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d024"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 5,
+    "hours": 7.5,
+    "touches": 14
+   }
+  },
+  {
+   "id": "d025",
+   "name": "Zoe L.",
+   "company": "Silverline Freight",
+   "title": "CFO",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-27"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-02"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-14"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-02"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-20",
+    "reason": "Could not get the approver to engage"
+   },
+   "sources": [
+    "https://recorder.example/call/d025"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.8,
+    "touches": 13
+   }
+  },
+  {
+   "id": "d026",
+   "name": "Kai E.",
+   "company": "Kestrel Robotics",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-05"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-10"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-11"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-17"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-21"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-07-29"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-08-03"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-08-26"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d026"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d027",
+   "name": "Quinn L.",
+   "company": "Fairhaven Pet",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-28"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-06"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-22",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d027"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d028",
+   "name": "Elena K.",
+   "company": "Northgate Vet",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-03"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-10"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-21",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d028"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d029",
+   "name": "Rosa A.",
+   "company": "Bluecart Retail",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-03"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-06"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-16"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-26",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d029"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d030",
+   "name": "Yara Z.",
+   "company": "Coppervale Energy",
+   "title": "Controller",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-06-29"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-07"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-14"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-26",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d030"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d031",
+   "name": "Dev H.",
+   "company": "Tidewater Brands",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-02"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-07"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-18"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-31",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d031"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d032",
+   "name": "Lena X.",
+   "company": "Ironwood Fabrication",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-06"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-13"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-21"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-04"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-28",
+    "reason": "Could not get the approver to engage"
+   },
+   "sources": [
+    "https://recorder.example/call/d032"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.8,
+    "touches": 13
+   }
+  },
+  {
+   "id": "d033",
+   "name": "Kai S.",
+   "company": "Oakmont Software",
+   "title": "CFO",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-08"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-15"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-16"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-20"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-26"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-08-01"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-08-07"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-08-25"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d033"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d034",
+   "name": "Elena Y.",
+   "company": "Harborline Logistics",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-08"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-14"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-26",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d034"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d035",
+   "name": "Uma F.",
+   "company": "Marlow Kitchens",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-11"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-14"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-30"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-17",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d035"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d036",
+   "name": "Jon R.",
+   "company": "Kestrel Robotics",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-10"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-17"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-25",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d036"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d037",
+   "name": "Marco T.",
+   "company": "Oakmont Software",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-10"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-17"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-29",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d037"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d038",
+   "name": "Zoe G.",
+   "company": "Harborline Logistics",
+   "title": "Head of Accounting",
+   "caseStudy": "fractional-cfo",
+   "pull": "yes",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-07"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-15"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-16"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-25"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-09"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-08-28"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-09-12"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d038"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 5,
+    "hours": 7.5,
+    "touches": 14
+   }
+  },
+  {
+   "id": "d039",
+   "name": "Nia R.",
+   "company": "Summit Ridge Labs",
+   "title": "Head of Accounting",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "Referral",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-05"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-13"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-14"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-19"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-23"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-07-30"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-08-05"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-08-22"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d039"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d040",
+   "name": "Grace L.",
+   "company": "Westgate Home",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-19"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-22"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-23"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-07-25"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-07-31"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-08-05"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-08-08"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-08-20"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d040"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d041",
+   "name": "Hiro L.",
+   "company": "Silverline Freight",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-16"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-23"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-05"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-23"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-15"
+    }
+   ],
+   "exit": {
+    "at": "2026-10-01",
+    "reason": "Went quiet after pricing"
+   },
+   "sources": [
+    "https://recorder.example/call/d041"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 4,
+    "hours": 6.4,
+    "touches": 18
+   }
+  },
+  {
+   "id": "d042",
+   "name": "Femi J.",
+   "company": "Orchard Lane Cafes",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-17"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-24"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-08"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-01"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-22"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d042"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 4,
+    "hours": 6.4,
+    "touches": 18
+   }
+  },
+  {
+   "id": "d043",
+   "name": "Ana X.",
+   "company": "Orchard Lane Cafes",
+   "title": "Fractional CFO",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-16"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-24"
+    }
+   ],
+   "exit": {
+    "at": "2026-07-31",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d043"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d044",
+   "name": "Quinn X.",
+   "company": "Lakeshore Clinics",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-15"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-20"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-05",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d044"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d045",
+   "name": "Lena G.",
+   "company": "Fairhaven Pet",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-17"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-21"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-06",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d045"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d046",
+   "name": "Chloe W.",
+   "company": "Kestrel Robotics",
+   "title": "CFO",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-23"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-29"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-30"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-07"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-21"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-08"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-09-16"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-10-03"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d046"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 5,
+    "hours": 7.5,
+    "touches": 14
+   }
+  },
+  {
+   "id": "d047",
+   "name": "Sam X.",
+   "company": "Granite Peak HVAC",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-23"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-27"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-05"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-16"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-08-31"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-21",
+    "reason": "Went quiet after pricing"
+   },
+   "sources": [
+    "https://recorder.example/call/d047"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 4,
+    "hours": 6.4,
+    "touches": 18
+   }
+  },
+  {
+   "id": "d048",
+   "name": "Rosa G.",
+   "company": "Orchard Lane Cafes",
+   "title": "Fractional CFO",
+   "caseStudy": "fractional-cfo",
+   "pull": "yes",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-24"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-29"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-07-31"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-05"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-16"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-08-28"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-09-12"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-09-28"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d048"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 5,
+    "hours": 7.5,
+    "touches": 14
+   }
+  },
+  {
+   "id": "d049",
+   "name": "Kai R.",
+   "company": "Alder Health",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-27"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-31"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-07",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d049"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d050",
+   "name": "Kai X.",
+   "company": "Redfern Packaging",
+   "title": "VP Finance",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-25"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-28"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-11"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-02"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-10-04"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d050"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 4,
+    "hours": 6.4,
+    "touches": 18
+   }
+  },
+  {
+   "id": "d051",
+   "name": "Tara N.",
+   "company": "Harborline Logistics",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-24"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-27"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-05",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d051"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d052",
+   "name": "Grace J.",
+   "company": "Silverline Freight",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-25"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-30"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-16"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-28",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d052"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d053",
+   "name": "Jon F.",
+   "company": "Crestfield Dental",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-23"
+    },
+    {
+     "stage": "met",
+     "at": "2026-07-29"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-07"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-17",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d053"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d054",
+   "name": "Rosa L.",
+   "company": "Bluecart Retail",
+   "title": "VP Finance",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "Referral",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-03"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-06"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-09"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-15"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-31",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d054"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.5,
+    "touches": 8
+   }
+  },
+  {
+   "id": "d055",
+   "name": "Chloe I.",
+   "company": "Summit Ridge Labs",
+   "title": "Head of Accounting",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-01"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-04"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-21"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-07"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-20",
+    "reason": "Could not get the approver to engage"
+   },
+   "sources": [
+    "https://recorder.example/call/d055"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.8,
+    "touches": 13
+   }
+  },
+  {
+   "id": "d056",
+   "name": "Grace K.",
+   "company": "Granite Peak HVAC",
+   "title": "VP Finance",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Referral",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-01"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-06"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-16",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d056"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d057",
+   "name": "Omar M.",
+   "company": "Brightpath Learning",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-31"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-04"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-18"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-05",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d057"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d058",
+   "name": "Femi O.",
+   "company": "Pinebrook Foods",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Conference",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-01"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-06"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-22",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d058"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d059",
+   "name": "Quinn F.",
+   "company": "Brightpath Learning",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-30"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-05"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-12"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-01"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-22"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d059"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 4,
+    "hours": 6.4,
+    "touches": 18
+   }
+  },
+  {
+   "id": "d060",
+   "name": "Isla Z.",
+   "company": "Tidewater Brands",
+   "title": "Fractional CFO",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-02"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-06"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-08"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-18"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-25"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-14"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-30",
+    "reason": "Went quiet after pricing"
+   },
+   "sources": [
+    "https://recorder.example/call/d060"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 5,
+    "hours": 7.5,
+    "touches": 14
+   }
+  },
+  {
+   "id": "d061",
+   "name": "Jon L.",
+   "company": "Brightpath Learning",
+   "title": "Controller",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-30"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-06"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-21",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d061"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d062",
+   "name": "Sam K.",
+   "company": "Silverline Freight",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-07-29"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-03"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-18",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d062"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d063",
+   "name": "Tara D.",
+   "company": "Northgate Vet",
+   "title": "Fractional CFO",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-02"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-10"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-11"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-19"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-29"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-06"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-09-15"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d063"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 5,
+    "hours": 7.5,
+    "touches": 14
+   }
+  },
+  {
+   "id": "d064",
+   "name": "Priya Y.",
+   "company": "Ironwood Fabrication",
+   "title": "VP Finance",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-03"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-10"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-27",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d064"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d065",
+   "name": "Priya R.",
+   "company": "Quarry Street Media",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-10"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-14"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-26"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-19"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-10-02"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d065"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 4,
+    "hours": 6.4,
+    "touches": 18
+   }
+  },
+  {
+   "id": "d066",
+   "name": "Chloe R.",
+   "company": "Oakmont Software",
+   "title": "Fractional CFO",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-05"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-11"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-13"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-22"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-06",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d066"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.5,
+    "touches": 8
+   }
+  },
+  {
+   "id": "d067",
+   "name": "Femi Z.",
+   "company": "Orchard Lane Cafes",
+   "title": "VP Finance",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-07"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-12"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-19"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-31"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-10-01"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d067"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 4,
+    "hours": 6.4,
+    "touches": 18
+   }
+  },
+  {
+   "id": "d068",
+   "name": "Tara L.",
+   "company": "Marlow Kitchens",
+   "title": "CFO",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-05"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-13"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-14"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-18"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-21"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-08-29"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-09-04"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-09-14"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d068"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d069",
+   "name": "Sam A.",
+   "company": "Northgate Vet",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-09"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-12"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-24"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-17",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d069"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d070",
+   "name": "Victor M.",
+   "company": "Marlow Kitchens",
+   "title": "Fractional CFO",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-13"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-19"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-04",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d070"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d071",
+   "name": "Lena R.",
+   "company": "Redfern Packaging",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-15"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-21"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-29",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d071"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d072",
+   "name": "Victor B.",
+   "company": "Oakmont Software",
+   "title": "VP Finance",
+   "caseStudy": "fractional-cfo",
+   "pull": "yes",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-12"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-17"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-18"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-29"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-07"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-23",
+    "reason": "Could not get the approver to engage"
+   },
+   "sources": [
+    "https://recorder.example/call/d072"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 4,
+    "hours": 6,
+    "touches": 11
+   }
+  },
+  {
+   "id": "d073",
+   "name": "Rosa O.",
+   "company": "Harborline Logistics",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-17"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-20"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-21"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-24"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-08-29"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-03"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-09-09"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-10-03"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d073"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d074",
+   "name": "Tara I.",
+   "company": "Marlow Kitchens",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-15"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-19"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-26"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-11"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d074"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.8,
+    "touches": 13
+   }
+  },
+  {
+   "id": "d075",
+   "name": "Dev A.",
+   "company": "Fairhaven Pet",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-16"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-21"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-28"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-15",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d075"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d076",
+   "name": "Rosa O.",
+   "company": "Oakmont Software",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Conference",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-12"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-20"
+    }
+   ],
+   "exit": {
+    "at": "2026-08-30",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d076"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d077",
+   "name": "Isla Z.",
+   "company": "Alder Health",
+   "title": "Controller",
+   "caseStudy": "fractional-cfo",
+   "pull": "yes",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-25"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-28"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-30"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-09",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d077"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d078",
+   "name": "Rosa F.",
+   "company": "Harborline Logistics",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-25"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-28"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-05"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-24",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d078"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d079",
+   "name": "Jon C.",
+   "company": "Crestfield Dental",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-25"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-28"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-05",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d079"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d080",
+   "name": "Femi X.",
+   "company": "Quarry Street Media",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-19"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-25"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-03",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d080"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d081",
+   "name": "Rosa S.",
+   "company": "Redfern Packaging",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-21"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-27"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-28"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-31"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-06"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-12"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-09-15"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-10-03"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d081"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d082",
+   "name": "Dev M.",
+   "company": "Ironwood Fabrication",
+   "title": "Fractional CFO",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-18"
+    },
+    {
+     "stage": "met",
+     "at": "2026-08-24"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-08-25"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-08-31"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-04"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-10"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-09-17"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d082"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d083",
+   "name": "Rosa L.",
+   "company": "Harborline Logistics",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-30"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-04"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-15",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d083"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d084",
+   "name": "Zoe X.",
+   "company": "Redfern Packaging",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-26"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-02"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-09",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d084"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d085",
+   "name": "Ben W.",
+   "company": "Brightpath Learning",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-25"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-02"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-11"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d085"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d086",
+   "name": "Victor K.",
+   "company": "Coppervale Energy",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-28"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-04"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-13",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d086"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d087",
+   "name": "Ana M.",
+   "company": "Coppervale Energy",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-01"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-04"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-11"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-27"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d087"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.8,
+    "touches": 13
+   }
+  },
+  {
+   "id": "d088",
+   "name": "Kai T.",
+   "company": "Westgate Home",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-29"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-03"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-13",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d088"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d089",
+   "name": "Priya L.",
+   "company": "Ironwood Fabrication",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "Conference",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-30"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-04"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-09-06"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-16"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-27",
+    "reason": "Fit broke on a hard requirement"
+   },
+   "sources": [
+    "https://recorder.example/call/d089"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.5,
+    "touches": 8
+   }
+  },
+  {
+   "id": "d090",
+   "name": "Isla S.",
+   "company": "Orchard Lane Cafes",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-03"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-09"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-25"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d090"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d091",
+   "name": "Lena R.",
+   "company": "Orchard Lane Cafes",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Conference",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-03"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-08"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-21",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d091"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d092",
+   "name": "Rosa R.",
+   "company": "Fairhaven Pet",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-04"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-07"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-14"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d092"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d093",
+   "name": "Quinn O.",
+   "company": "Crestfield Dental",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-08-30"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-07"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-20",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d093"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d094",
+   "name": "Wen I.",
+   "company": "Crestfield Dental",
+   "title": "Controller",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-05"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-10"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-17"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-10-02"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d094"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.8,
+    "touches": 13
+   }
+  },
+  {
+   "id": "d095",
+   "name": "Femi Y.",
+   "company": "Brightpath Learning",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-04"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-07"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-15"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d095"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d096",
+   "name": "Zoe Z.",
+   "company": "Bluecart Retail",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-03"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-11"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-23"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d096"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d097",
+   "name": "Yara T.",
+   "company": "Ironwood Fabrication",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Referral",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-03"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-09"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-20",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d097"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d098",
+   "name": "Marco Q.",
+   "company": "Kestrel Robotics",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-13"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-16"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-27",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d098"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d099",
+   "name": "Femi L.",
+   "company": "Marlow Kitchens",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-08"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-15"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-23",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d099"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d100",
+   "name": "Priya T.",
+   "company": "Alder Health",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-14"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-17"
+    }
+   ],
+   "exit": {
+    "at": "2026-10-03",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d100"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d101",
+   "name": "Dev U.",
+   "company": "Fairhaven Pet",
+   "title": "Head of Accounting",
+   "caseStudy": "fractional-cfo",
+   "pull": "yes",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-10"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-14"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-09-16"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-24"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d101"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.5,
+    "touches": 8
+   }
+  },
+  {
+   "id": "d102",
+   "name": "Hiro L.",
+   "company": "Fairhaven Pet",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Referral",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-06"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-14"
+    }
+   ],
+   "exit": {
+    "at": "2026-09-23",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d102"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d103",
+   "name": "Priya N.",
+   "company": "Marlow Kitchens",
+   "title": "Head of Accounting",
+   "caseStudy": "fractional-cfo",
+   "pull": "yes",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-07"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-15"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-09-16"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-27"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d103"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4.5,
+    "touches": 8
+   }
+  },
+  {
+   "id": "d104",
+   "name": "Isla S.",
+   "company": "Marlow Kitchens",
+   "title": "VP Finance",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-10"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-14"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-21"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d104"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d105",
+   "name": "Hiro Y.",
+   "company": "Silverline Freight",
+   "title": "Fractional CFO",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-13"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-16"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-09-17"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-09-20"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-09-24"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-09-29"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-10-02"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d105"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d106",
+   "name": "Hiro Z.",
+   "company": "Silverline Freight",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-21"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-24"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-10-04"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d106"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d107",
+   "name": "Elena X.",
+   "company": "Fairhaven Pet",
+   "title": "Fractional CFO",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "Referral",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-19"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-22"
+    }
+   ],
+   "exit": {
+    "at": "2026-10-03",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d107"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d108",
+   "name": "Marco V.",
+   "company": "Northgate Vet",
+   "title": "Controller",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-15"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-21"
+    }
+   ],
+   "exit": {
+    "at": "2026-10-03",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d108"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d109",
+   "name": "Lena S.",
+   "company": "Harborline Logistics",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-19"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-22"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d109"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d110",
+   "name": "Sam U.",
+   "company": "Quarry Street Media",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-20"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-23"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d110"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d111",
+   "name": "Ben Y.",
+   "company": "Westgate Home",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-17"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-23"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-10-05"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d111"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 9
+   }
+  },
+  {
+   "id": "d112",
+   "name": "Marco H.",
+   "company": "Brightpath Learning",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-15"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-21"
+    }
+   ],
+   "exit": {
+    "at": "2026-10-05",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d112"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d113",
+   "name": "Priya P.",
+   "company": "Coppervale Energy",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-16"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-21"
+    }
+   ],
+   "exit": {
+    "at": "2026-10-03",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d113"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d114",
+   "name": "Victor R.",
+   "company": "Fairhaven Pet",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Cold email",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-17"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-24"
+    }
+   ],
+   "exit": {
+    "at": "2026-10-03",
+    "reason": "Good-enough option already in place"
+   },
+   "sources": [
+    "https://recorder.example/call/d114"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d115",
+   "name": "Victor N.",
+   "company": "Harborline Logistics",
+   "title": "VP Finance",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-27"
+    },
+    {
+     "stage": "met",
+     "at": "2026-10-02"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-10-03"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d115"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d116",
+   "name": "Uma C.",
+   "company": "Bluecart Retail",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "yes",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-22"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-30"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-10-01"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d116"
+   ],
+   "pullEvidence": "Audit this year, no firm date yet; current close process is spreadsheets.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3,
+    "touches": 6
+   }
+  },
+  {
+   "id": "d117",
+   "name": "Yara A.",
+   "company": "Marlow Kitchens",
+   "title": "Fractional CFO",
+   "caseStudy": null,
+   "pull": "unknown",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-26"
+    },
+    {
+     "stage": "met",
+     "at": "2026-10-02"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d117"
+   ],
+   "pullEvidence": null,
+   "effort": {
+    "meetings": 1,
+    "hours": 1,
+    "touches": 2
+   }
+  },
+  {
+   "id": "d118",
+   "name": "Yara T.",
+   "company": "Coppervale Energy",
+   "title": "VP Finance",
+   "caseStudy": null,
+   "pull": "unknown",
+   "channel": "LinkedIn",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-22"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-30"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d118"
+   ],
+   "pullEvidence": null,
+   "effort": {
+    "meetings": 1,
+    "hours": 1,
+    "touches": 2
+   }
+  },
+  {
+   "id": "d119",
+   "name": "Marco N.",
+   "company": "Silverline Freight",
+   "title": "CFO",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-25"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-28"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d119"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d120",
+   "name": "Wen K.",
+   "company": "Silverline Freight",
+   "title": "Controller",
+   "caseStudy": null,
+   "pull": "no",
+   "channel": "Conference",
+   "owner": "Jordan (AE)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-25"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-28"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d120"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d121",
+   "name": "Quinn F.",
+   "company": "Orchard Lane Cafes",
+   "title": "Head of Accounting",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "Conference",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-23"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-28"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-09-29"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-10-01"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-10-05"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d121"
+   ],
+   "pullEvidence": "First audit fieldwork starts in under 60 days; auditors already sent the PBC list; two-person team.",
+   "effort": {
+    "meetings": 2,
+    "hours": 3.2,
+    "touches": 5
+   }
+  },
+  {
+   "id": "d122",
+   "name": "Marco M.",
+   "company": "Silverline Freight",
+   "title": "Controller",
+   "caseStudy": "fractional-cfo",
+   "pull": "no",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-26"
+    },
+    {
+     "stage": "met",
+     "at": "2026-09-30"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d122"
+   ],
+   "pullEvidence": "Exploring; no audit on the calendar.",
+   "effort": {
+    "meetings": 1,
+    "hours": 1.6,
+    "touches": 4
+   }
+  },
+  {
+   "id": "d123",
+   "name": "Femi B.",
+   "company": "Redfern Packaging",
+   "title": "Head of Accounting",
+   "caseStudy": null,
+   "pull": "unknown",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-09-24"
+    },
+    {
+     "stage": "met",
+     "at": "2026-10-01"
+    }
+   ],
+   "exit": null,
+   "sources": [
+    "https://recorder.example/call/d123"
+   ],
+   "pullEvidence": null,
+   "effort": {
+    "meetings": 1,
+    "hours": 1,
+    "touches": 2
+   }
+  },
+  {
+   "id": "c001",
+   "name": "Zoe A.",
+   "company": "Harborline Logistics",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-01-13"
+    },
+    {
+     "stage": "met",
+     "at": "2026-01-18"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-01-19"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-01-24"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-01-30"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-02-06"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-02-12"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-02-28"
+    },
+    {
+     "stage": "renewed",
+     "at": "2026-09-16"
+    }
+   ],
+   "exit": null,
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   },
+   "sources": [
+    "https://crm.example/deal/c001"
+   ],
+   "pullEvidence": "First audit forced by a PE sponsor; deadline set by the auditors."
+  },
+  {
+   "id": "c002",
+   "name": "Sam B.",
+   "company": "Summit Ridge Labs",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-02-02"
+    },
+    {
+     "stage": "met",
+     "at": "2026-02-07"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-02-08"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-02-13"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-02-19"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-02-26"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-03-04"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-03-20"
+    }
+   ],
+   "exit": null,
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   },
+   "sources": [
+    "https://crm.example/deal/c002"
+   ],
+   "pullEvidence": "First audit forced by a PE sponsor; deadline set by the auditors."
+  },
+  {
+   "id": "c003",
+   "name": "Sam C.",
+   "company": "Silverline Freight",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-02-22"
+    },
+    {
+     "stage": "met",
+     "at": "2026-02-27"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-02-28"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-03-05"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-03-11"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-03-18"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-03-24"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-04-09"
+    }
+   ],
+   "exit": null,
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   },
+   "sources": [
+    "https://crm.example/deal/c003"
+   ],
+   "pullEvidence": "First audit forced by a PE sponsor; deadline set by the auditors."
+  },
+  {
+   "id": "c004",
+   "name": "Femi D.",
+   "company": "Fairhaven Pet",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-03-14"
+    },
+    {
+     "stage": "met",
+     "at": "2026-03-19"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-03-20"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-03-25"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-03-31"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-04-07"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-04-13"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-04-29"
+    }
+   ],
+   "exit": null,
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   },
+   "sources": [
+    "https://crm.example/deal/c004"
+   ],
+   "pullEvidence": "First audit forced by a PE sponsor; deadline set by the auditors."
+  },
+  {
+   "id": "c005",
+   "name": "Nia E.",
+   "company": "Marlow Kitchens",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "LinkedIn",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-04-03"
+    },
+    {
+     "stage": "met",
+     "at": "2026-04-08"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-04-09"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-04-14"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-04-20"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-04-27"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-05-03"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-05-19"
+    }
+   ],
+   "exit": null,
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   },
+   "sources": [
+    "https://crm.example/deal/c005"
+   ],
+   "pullEvidence": "First audit forced by a PE sponsor; deadline set by the auditors."
+  },
+  {
+   "id": "c006",
+   "name": "Tara F.",
+   "company": "Crestfield Dental",
+   "title": "Controller",
+   "caseStudy": "first-audit",
+   "pull": "extreme",
+   "channel": "Referral",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "booked",
+     "at": "2026-04-23"
+    },
+    {
+     "stage": "met",
+     "at": "2026-04-28"
+    },
+    {
+     "stage": "pull",
+     "at": "2026-04-29"
+    },
+    {
+     "stage": "conceptual",
+     "at": "2026-05-04"
+    },
+    {
+     "stage": "detailed",
+     "at": "2026-05-10"
+    },
+    {
+     "stage": "planning",
+     "at": "2026-05-17"
+    },
+    {
+     "stage": "closed",
+     "at": "2026-05-23"
+    },
+    {
+     "stage": "indicator",
+     "at": "2026-06-08"
+    }
+   ],
+   "exit": null,
+   "effort": {
+    "meetings": 3,
+    "hours": 4,
+    "touches": 6
+   },
+   "sources": [
+    "https://crm.example/deal/c006"
+   ],
+   "pullEvidence": "First audit forced by a PE sponsor; deadline set by the auditors."
+  },
+  {
+   "id": "x001",
+   "name": "Weekly pipeline sync",
+   "company": "Tallyhook (internal)",
+   "pull": "unknown",
+   "channel": "Internal",
+   "owner": "Maya (founder)",
+   "events": [
+    {
+     "stage": "met",
+     "at": "2026-09-25"
+    }
+   ],
+   "exit": null,
+   "sources": [],
+   "excluded": {
+    "at": "2026-09-26",
+    "reason": "Internal meeting, not a sales conversation",
+    "by": "founder"
+   }
+  }
+ ],
+ "dataQuality": [
+  {
+   "level": "info",
+   "message": "Conference touches are logged by hand.",
+   "fix": "Connect the event app or keep logging weekly.",
+   "source": "agent"
+  }
+ ],
+ "settings": {
+  "windowWeeks": 4,
+  "inflowWeeks": 12,
+  "staleDays": 45,
+  "horizonWeeks": 520,
+  "simRuns": 200,
+  "seed": 7
+ }
+}
