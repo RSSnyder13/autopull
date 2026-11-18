@@ -1,4 +1,4 @@
-You are refreshing this founder's factory: the model behind their AI Rob homepage. Load AI Rob first (see "AI Rob" in the brain's `AGENTS.md`) and ask it to run its factory refresh. Every judgment in the steps below comes from AI Rob. If AI Rob can't be loaded, say so in one line and stop.
+You are refreshing this founder's factory: the model behind their AI Rob homepage. Load AI Rob first (see "AI Rob" in the brain's `AGENTS.md`) and ask it to run its factory refresh. Every judgment in the steps below comes from AI Rob. If AI Rob can't be loaded, do nothing else: tell the founder to set it up at https://airobsnyder.com/ and stop.
 
 The working directory is the factory app. The model is at `$FACTORY_MODEL` (format: `MODEL.md`). The founder's GTM brain is the parent folder: `gtm/`, `deals/`, `company/tools.md`. Read `gtm/overrides.md` first.
 
