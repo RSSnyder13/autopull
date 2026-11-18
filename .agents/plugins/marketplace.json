@@ -1,0 +1,12 @@
+{
+  "name": "autopull",
+  "interface": { "displayName": "Autopull" },
+  "plugins": [
+    {
+      "name": "autopull",
+      "source": { "source": "local", "path": "./" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    }
+  ]
+}

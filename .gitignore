@@ -6,3 +6,6 @@ node_modules/
 factory/config.json
 factory/factory.json
 factory/versions/
+
+# Built skill zips (npm run build:skills)
+dist/
