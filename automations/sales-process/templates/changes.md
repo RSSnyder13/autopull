@@ -1,4 +1,4 @@
-# Sales process loop: changes
+# Sales process automation: changes
 
 Every change suggested or made by the weekly review, newest first. Never edit a past entry; add the result as a new line under it.
 

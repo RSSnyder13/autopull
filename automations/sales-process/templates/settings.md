@@ -1,4 +1,4 @@
-# Sales process loop settings
+# Sales process automation settings
 
 Last changed: [date]
 

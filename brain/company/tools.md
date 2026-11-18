@@ -1,6 +1,6 @@
 # Tools
 
-Where each kind of data lives, and whether the agent can reach it. Loops read this before pulling data.
+Where each kind of data lives, and whether the agent can reach it. Automations read this before pulling data.
 
 | Data | Tool | Connected? | Notes |
 |---|---|---|---|

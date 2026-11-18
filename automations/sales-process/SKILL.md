@@ -1,25 +1,25 @@
 ---
 name: sales-process
-description: The sales process loop. Every morning it preps the founder for the day's sales calls (which call it is, the plan or script, coaching reminders), reminds them before each call, runs an extreme deal review after each call with next steps and a drafted recap, and every week checks whether last week's changes worked and suggests updates to the case study, the sales process and the founder's coaching. Use for "set up the sales process loop", "prep my calls", "review my call", "weekly sales review", or when a sales call was just recorded.
+description: The sales-process automation. Every morning it preps the founder for the day's sales calls (which call it is, the plan or script, coaching reminders), reminds them before each call, runs an extreme deal review after each call with next steps and a drafted recap, and every week checks whether last week's changes worked and suggests updates to the case study, the sales process and the founder's coaching. Use for "set up the sales-process automation", "prep my calls", "review my call", "weekly sales review", or when a sales call was just recorded.
 version: 0.1.0
 ---
 
-# Sales process loop
+# Sales process automation
 
 Everything is saved in the founder's GTM brain. Paths below are in the brain; its `AGENTS.md` has the full map and the rules (never overwrite, write a new version). Every step marked **AI Rob** needs AI Rob loaded first, as the brain's `AGENTS.md` says.
 
-This loop's own files, in the brain:
-- `loops/sales-process/settings.md`: when it runs, where it notifies the founder, and whether they want to review changes first. Created from `templates/settings.md`.
-- `loops/sales-process/changes.md`: every change suggested or made, its hypothesis, and later whether it worked. Created from `templates/changes.md`.
-- `loops/sales-process/runs/YYYY-MM-DD.md`: what each run did and what it sent the founder.
+This automation's own files, in the brain:
+- `automations/sales-process/settings.md`: when it runs, where it notifies the founder, and whether they want to review changes first. Created from `templates/settings.md`.
+- `automations/sales-process/changes.md`: every change suggested or made, its hypothesis, and later whether it worked. Created from `templates/changes.md`.
+- `automations/sales-process/runs/YYYY-MM-DD.md`: what each run did and what it sent the founder.
 
 ## Before anything
 
-Run the checks in `${CLAUDE_PLUGIN_ROOT}/START.md` every time this loop runs, before any step below. If AI Rob isn't set up, send the founder to https://airobsnyder.com/ and stop. If the factory isn't set up (brain, case study, sales process, `factory/`), run the `audit` loop first, then come back here.
+Run the checks in `${CLAUDE_PLUGIN_ROOT}/START.md` every time this automation runs, before any step below. If AI Rob isn't set up, send the founder to https://airobsnyder.com/ and stop. If the factory isn't set up (brain, case study, sales process, `factory/`), run the `setup` automation first, then come back here.
 
 ## Get started
 
-* Copy `templates/settings.md` and `templates/changes.md` into `loops/sales-process/`. Ask the founder the questions in `settings.md`.
+* Copy `templates/settings.md` and `templates/changes.md` into `automations/sales-process/`. Ask the founder the questions in `settings.md`.
 * Set up the schedule: every morning, before each call, after each call, and every week (see `settings.md`).
 
 ## Every day
@@ -51,7 +51,7 @@ Run the checks in `${CLAUDE_PLUGIN_ROOT}/START.md` every time this loop runs, be
 Fridays by default, but any day the founder wants, at any cadence they prefer (`settings.md`).
 
 * Have **AI Rob** run across the week's deal reviews and the relevant data. If the factory is running, run the factory refresh first (`factory/prompts/refresh.md`). If not, look at whatever data you have access to (e.g., Stripe records).
-   * If there were changes to the sales process, or coaching for the founder, suggested or made in last week's loop (`changes.md`):
+   * If there were changes to the sales process, or coaching for the founder, suggested or made in last week's review (`changes.md`):
       * Have **AI Rob** look at whether they were actually used in the sales conversations.
       * Have **AI Rob** determine whether they had the intended effect or not (or unclear).
       * Have **AI Rob** decide whether to continue with last week's changes, roll them back, or tweak them. Write the result in `changes.md`.

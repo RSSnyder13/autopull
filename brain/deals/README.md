@@ -11,7 +11,7 @@ deals/sarah-acme/
 
 ## deal.md
 
-The fields at the top let loops and the factory read a deal without parsing the whole file. Then the current state, which gets a new version whenever something changes. Then the timeline, newest first, which only ever gets new lines.
+The fields at the top let the automations and the factory read a deal without parsing the whole file. Then the current state, which gets a new version whenever something changes. Then the timeline, newest first, which only ever gets new lines.
 
 ```markdown
 ---
