@@ -1,0 +1,9 @@
+{
+  "name": "gtm-loops",
+  "version": "0.1.0",
+  "description": "Open-source GTM loops that run a founder's sales and growth every day and every week, file everything in a GTM brain, and call AI Rob for the judgment.",
+  "author": { "name": "Rob Snyder" },
+  "repository": "https://github.com/RSSnyder13/gtm-loops",
+  "license": "MIT",
+  "skills": "./loops/"
+}
