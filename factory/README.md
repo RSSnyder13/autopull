@@ -15,4 +15,4 @@ A live model of the founder's case study factory: every buyer moving from first 
 
 The app never calls an AI service itself. It runs the founder's own agent with the commands in `config.json` (`refreshCommand`, `chatCommand`, `notifyCommand`). Copy `config.example.json` to `config.json` and set them. Examples for Claude Code and Codex are inside.
 
-The app reads `config.json` and `factory.json` from its own folder, so the audit copies this folder into the founder's brain at `factory/`.
+The app reads `config.json` and `factory.json` from its own folder, so `setup` copies this folder into the founder's brain at `factory/`.
