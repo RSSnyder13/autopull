@@ -6,6 +6,8 @@ version: 0.1.0
 
 # Setup
 
+> `${CLAUDE_PLUGIN_ROOT}` is the Autopull folder, two levels up from this `SKILL.md`. If the variable isn't set (Codex, ChatGPT, Claude.ai), use that folder.
+
 Builds the founder's GTM factory. Every other automation sends the founder here first if the factory isn't set up. Paths below are in the founder's GTM brain unless they start with `${CLAUDE_PLUGIN_ROOT}`. Every step marked **AI Rob** needs AI Rob loaded first, as the brain's `AGENTS.md` says.
 
 ## Before anything

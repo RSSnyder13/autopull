@@ -4,10 +4,13 @@
   "private": true,
   "description": "Autopull: GTM automations, the GTM brain template, and the factory app.",
   "license": "MIT",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "test": "node --test factory/test/*.test.js",
     "start": "node factory/server.js",
-    "factory": "node factory/cli.js"
+    "factory": "node factory/cli.js",
+    "build:skills": "node scripts/build-skill-zips.js"
   }
 }

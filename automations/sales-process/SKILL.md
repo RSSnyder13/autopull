@@ -6,6 +6,8 @@ version: 0.1.0
 
 # Sales process automation
 
+> `${CLAUDE_PLUGIN_ROOT}` is the Autopull folder, two levels up from this `SKILL.md`. If the variable isn't set (Codex, ChatGPT, Claude.ai), use that folder.
+
 Everything is saved in the founder's GTM brain. Paths below are in the brain; its `AGENTS.md` has the full map and the rules (never overwrite, write a new version). Every step marked **AI Rob** needs AI Rob loaded first, as the brain's `AGENTS.md` says.
 
 This automation's own files, in the brain:

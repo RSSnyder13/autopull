@@ -20,8 +20,41 @@ Email me about which automations you want next - rob@reframeb2b.com
 
 ## Install
 
-1. Install this repo as a Claude Code plugin (it ships `.claude-plugin/plugin.json`).
-2. Ask it to get started
+Autopull needs AI Rob installed in the same app first: https://airobsnyder.com/. Then pick your app below and ask it to "set up Autopull".
+
+### Claude Code
+
+```
+/plugin marketplace add RSSnyder13/autopull
+/plugin install autopull@autopull
+```
+
+### Claude desktop app (Cowork)
+
+Customize → Plugins → Add marketplace → enter `RSSnyder13/autopull`, then install **Autopull**.
+
+### Codex (CLI, desktop app, IDE)
+
+```
+codex plugin marketplace add RSSnyder13/autopull
+codex plugin add autopull@autopull
+```
+
+Start a new thread after installing so Codex picks up the skills.
+
+### ChatGPT and Claude.ai (skill upload)
+
+These apps take skills as zip files, one per automation.
+
+1. Download `autopull-setup.zip` and `autopull-sales-process.zip` from the latest [release](https://github.com/RSSnyder13/autopull/releases).
+2. ChatGPT: Skills → Create → Upload from your computer. Claude.ai: Settings → Capabilities → Skills → Upload skill.
+3. Upload `autopull-setup.zip` first, then the others.
+
+The factory homepage is a small Node app. Apps that can't run a local server (ChatGPT, Claude.ai) still build and update the brain and the factory files; open the homepage from a coding agent or your own computer.
+
+### Publishing a new version
+
+Bump `version` in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` and `.codex-plugin/plugin.json`, then push a tag (`git tag v0.2.0 && git push --tags`). The release workflow builds the skill zips (`npm run build:skills`) and attaches them to the release.
 
 ## What's open and what isn't
 
@@ -31,7 +64,11 @@ Email me about which automations you want next - rob@reframeb2b.com
 ## What's in here
 
 ```
+.claude-plugin/ Claude plugin + marketplace manifests
+.codex-plugin/  Codex plugin manifest
+.agents/        Codex marketplace manifest
 automations/    one folder per automation (each is a skill)
 brain/          the GTM brain template, copied into your private repo
 factory/        the factory app: model, engine, homepage, morning brief
+scripts/        builds the skill zips for ChatGPT and Claude.ai
 ```
