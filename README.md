@@ -1,6 +1,8 @@
 # Autopull
 
-By Rob Snyder Self-improving automations that run your go-to-market, help you find pull, and tighten your PMF. 
+By Rob Snyder 
+
+Self-improving automations that run your go-to-market, help you find pull, and tighten your PMF. 
 
 Autopull's goal is for you to spend zero mental effort on anything other than working with customers.
 
