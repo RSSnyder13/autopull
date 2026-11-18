@@ -1,6 +1,4 @@
-# Autopull
-
-By Rob Snyder 
+# Autopull (by Rob Snyder)
 
 Self-improving automations that run your go-to-market, help you find pull, and tighten your PMF. 
 
