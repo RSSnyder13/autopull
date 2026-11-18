@@ -1,4 +1,4 @@
-Run this founder's morning plan. Load AI Rob first (see "AI Rob" in the brain's `AGENTS.md`) and ask it to write the morning plan. If AI Rob can't be loaded, say so in one line and stop. Read `gtm/overrides.md` in the brain first.
+Run this founder's morning plan. Load AI Rob first (see "AI Rob" in the brain's `AGENTS.md`) and ask it to write the morning plan. If AI Rob can't be loaded, do nothing else: tell the founder to set it up at https://airobsnyder.com/ and stop. Read `gtm/overrides.md` in the brain first.
 
 1. Refresh the model by following `prompts/refresh.md` (this also runs the deal reviews if they are on).
 2. If any loop has left something for today's plan (call prep from the sales process loop, replies from an outbound loop), read it from `loops/<loop>/runs/` in the brain.

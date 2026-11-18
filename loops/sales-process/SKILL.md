@@ -13,10 +13,12 @@ This loop's own files, in the brain:
 - `loops/sales-process/changes.md`: every change suggested or made, its hypothesis, and later whether it worked. Created from `templates/changes.md`.
 - `loops/sales-process/runs/YYYY-MM-DD.md`: what each run did and what it sent the founder.
 
+## Before anything
+
+Run the checks in `${CLAUDE_PLUGIN_ROOT}/START.md` every time this loop runs, before any step below. If AI Rob isn't set up, send the founder to https://airobsnyder.com/ and stop. If the factory isn't set up (brain, case study, sales process, `factory/`), run the `audit` loop first, then come back here.
+
 ## Get started
 
-* If there is no GTM brain (no `AGENTS.md` with the brain's folders in the working folder), create one by copying `${CLAUDE_PLUGIN_ROOT}/brain/` into it and running `git init`.
-* If no v1 sales process or case study is written anywhere (`gtm/sales-process.md`, `gtm/case-study.md`), ask **AI Rob** to run an audit to create them and store them there (ideally creating the factory in `factory/`).
 * Copy `templates/settings.md` and `templates/changes.md` into `loops/sales-process/`. Ask the founder the questions in `settings.md`.
 * Set up the schedule: every morning, before each call, after each call, and every week (see `settings.md`).
 

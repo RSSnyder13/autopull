@@ -21,7 +21,7 @@ factory/        the factory app: model, engine, homepage, morning brief
 
 | Loop | Status |
 |---|---|
-| `audit` | Planned. Sets up the brain, the case study, the sales process and the factory, and says which loop to turn on next. |
+| `audit` | Planned. Sets up the factory: the brain, the case study and sales process (written by AI Rob), the factory app and its schedule. Then says which loop to turn on next. Every other loop runs it first if the factory isn't set up. |
 | `sales-process` | v1 draft |
 | `linkedin-outbound` | In progress |
 | `founder-coaching` | Planned. How the founder spends their time. |
@@ -33,9 +33,12 @@ factory/        the factory app: model, engine, homepage, morning brief
 
 ## Install
 
-1. Install this repo as a Claude Code plugin (it ships `.claude-plugin/plugin.json`), or copy the loop folders you want into `.claude/skills/`.
-2. Install AI Rob.
-3. In an empty folder, ask: "Set up my GTM brain." The agent copies `brain/` into that folder, runs `git init`, and from then on the loops write there. Keep that repo private: it holds your prospects and customers.
+1. **Set up AI Rob** at https://airobsnyder.com/. It is the judgment layer: nothing here runs without it.
+2. Install this repo as a Claude Code plugin (it ships `.claude-plugin/plugin.json`), or copy the loop folders you want into `.claude/skills/`.
+3. In an empty folder, ask for anything (for example "prep my calls"). Every loop runs the same checks first (`START.md`):
+   1. No AI Rob? You're sent to https://airobsnyder.com/ to set it up.
+   2. No factory? The `audit` loop sets it up: it creates your GTM brain in that folder (a private git repo, since it holds your prospects and customers), has AI Rob write your case study and sales process, and builds the factory.
+   3. Then it does what you asked.
 
 ## Three rules every loop follows
 

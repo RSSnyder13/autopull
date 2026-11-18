@@ -35,10 +35,12 @@ Also:
 
 ## AI Rob
 
-The loops call AI Rob for every judgment about PULL. Before a step that needs it:
+AI Rob is the judgment layer. Nothing here runs without it. Before any loop or factory prompt does anything, it runs the checks in the plugin's `START.md`: AI Rob is set up, then the factory is set up.
+
+To load AI Rob:
 
 1. If an `ai-rob` skill is installed, load it.
 2. If not, and a Skillfully connector is available, load the skill named exactly `ai-rob` from it.
 3. Ask for the job by name and follow its routing.
 
-If AI Rob can't be loaded, say so in one line, do the gathering and filing, and stop before the judgment. Never write a PULL judgment from memory. Never copy AI Rob's instructions into this repo.
+If AI Rob can't be loaded, do nothing else. Tell the founder to set it up at https://airobsnyder.com/ and ask again. Never write a PULL judgment from memory. Never copy AI Rob's instructions into this repo.
