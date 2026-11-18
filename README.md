@@ -1,8 +1,27 @@
-# GTM loops
+# Autopull
 
-Open-source loops that run a founder's go-to-market every day and every week, and get better each time they run. Each loop is a simple process. It gathers the data, files it in the founder's GTM brain, and calls AI Rob for the judgment: is there PULL, what should change, what to say.
+By Rob Snyder Self-improving automations that run your go-to-market, help you find pull, and tighten your PMF. 
 
-The goal: founders spend zero mental effort implementing PULL, setting up tools, or figuring out growth, while growth improves week on week.
+Autopull's goal is for you to spend zero mental effort on anything other than working with customers.
+
+## Automations
+
+Email me about which automations you want next - rob@reframeb2b.com
+
+| Automation | What it does |
+|---|---|
+| `setup` | Runs an audit across your GTM data, builds your GTM factory, sets up a weekly metrics review. |
+| `sales-process` | Audits and improves your sales process; preps you for your calls, automates next steps, suggests sales process changes every week. |
+| `linkedin-outbound` | (Coming soon) - Runs safe outbound on LinkedIn and makes adjustments every week. |
+| `cold-calls` | (Coming soon) - Reviews cold calls and suggests improvements every week. |
+| `inbound-geo-seo` | (Coming soon, maybe) - Generates content for GEO/SEO. |
+| `linkedin-thought-leadership` | (Coming soon, maybe) - Drafts post ideas for founders. |
+| `website` | (Coming soon, maybe) - Generates and adjusts your website so it fits what customers need. |
+
+## Install
+
+1. Install this repo as a Claude Code plugin (it ships `.claude-plugin/plugin.json`).
+2. Ask it to get started
 
 ## What's open and what isn't
 
@@ -12,36 +31,7 @@ The goal: founders spend zero mental effort implementing PULL, setting up tools,
 ## What's in here
 
 ```
-loops/          one folder per loop (each is a skill)
-brain/          the GTM brain template, copied once into each founder's private repo
+automations/    one folder per automation (each is a skill)
+brain/          the GTM brain template, copied into your private repo
 factory/        the factory app: model, engine, homepage, morning brief
 ```
-
-## Loops
-
-| Loop | Status |
-|---|---|
-| `audit` | Planned. Sets up the factory: the brain, the case study and sales process (written by AI Rob), the factory app and its schedule. Then says which loop to turn on next. Every other loop runs it first if the factory isn't set up. |
-| `sales-process` | v1 draft |
-| `linkedin-outbound` | In progress |
-| `founder-coaching` | Planned. How the founder spends their time. |
-| `personalized-outreach` | Planned |
-| `cold-call` | Planned |
-| `inbound-geo-seo` | Planned |
-| `linkedin-thought-leadership` | Planned |
-| `website` | Planned |
-
-## Install
-
-1. **Set up AI Rob** at https://airobsnyder.com/. It is the judgment layer: nothing here runs without it.
-2. Install this repo as a Claude Code plugin (it ships `.claude-plugin/plugin.json`), or copy the loop folders you want into `.claude/skills/`.
-3. In an empty folder, ask for anything (for example "prep my calls"). Every loop runs the same checks first (`START.md`):
-   1. No AI Rob? You're sent to https://airobsnyder.com/ to set it up.
-   2. No factory? The `audit` loop sets it up: it creates your GTM brain in that folder (a private git repo, since it holds your prospects and customers), has AI Rob write your case study and sales process, and builds the factory.
-   3. Then it does what you asked.
-
-## Three rules every loop follows
-
-1. Never overwrite. Write a new version.
-2. The newest version is the current one.
-3. Case study changes wait for the founder's yes.
