@@ -1,8 +1,8 @@
 {
   "name": "autopull",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Autopull: GTM automations, the GTM brain template, and the factory app.",
+  "description": "Autopull: a self-improving sales process. The automations, the GTM brain template, and the factory app.",
   "license": "MIT",
   "engines": {
     "node": ">=18"

@@ -24,7 +24,7 @@ Stages are ordered and belong to a machine: `pipeline`, `sales` or `delivery`. T
 - **Sales:** First conversation → PULL → Conceptual fit → Detailed fit → Project planning → Closed
 - **Delivery:** Hit X → Renewed
 
-A deal reaches a stage only when it actually cleared that stage's exit; "more or less" does not count. Rename stages to the founder's words (and name X concretely, for example "Hit X: first audit passed on the workspace"), but keep the machines and the order. Pipeline stages can differ by channel. Keep the shared ones on the main line and put the channel detail in `pipelineCounts`.
+A deal reaches a stage only when it actually cleared that stage's exit; "more or less" does not count. Rename stages to the founder's words (and name X concretely, for example "Hit X: first audit passed on the workspace"), but keep the machines and the order. Autopull doesn't run outreach, so most founders' factories start at Meeting booked and log no pipeline counts; the engine then starts the pipeline machine at first meetings. If a founder does track outreach, pipeline stages can differ by channel: keep the shared ones on the main line and put the channel detail in `pipelineCounts`.
 
 `milestones` tells the engine which stages carry the standards: `inflow` (first meeting held, default `met`), `pull`, `close`, `success` (X). Change them only if you renamed those stage ids.
 
