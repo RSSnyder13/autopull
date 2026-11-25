@@ -2,7 +2,7 @@
 // Builds one uploadable skill zip per automation, for apps that take a skill
 // as a zip instead of installing the whole plugin (ChatGPT Skills, Claude.ai
 // Skills). Each zip holds <automation>/SKILL.md and its own files, plus the
-// rest of the plugin (START.md, brain/, factory/, automations/) in
+// rest of the plugin (START.md, FEEDBACK.md, brain/, factory/, automations/) in
 // <automation>/autopull/, which stands in for ${CLAUDE_PLUGIN_ROOT}.
 //
 // Usage: node scripts/build-skill-zips.js   ->  dist/autopull-<automation>.zip
@@ -23,6 +23,7 @@ const tracked = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: '
 const pluginFiles = tracked.filter(
   (f) =>
     f === 'START.md' ||
+    f === 'FEEDBACK.md' ||
     f.startsWith('brain/') ||
     f.startsWith('automations/') ||
     (f.startsWith('factory/') && !f.startsWith('factory/test/'))

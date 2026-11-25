@@ -1,21 +1,31 @@
 {
   "name": "autopull",
-  "owner": { "name": "Rob Snyder" },
+  "owner": {
+    "name": "Rob Snyder"
+  },
   "metadata": {
-    "description": "Autopull by Rob Snyder: self-improving GTM automations.",
-    "version": "0.1.0"
+    "description": "Autopull by Rob Snyder: a self-improving sales process.",
+    "version": "0.2.0"
   },
   "plugins": [
     {
       "name": "autopull",
       "source": "./",
-      "description": "Self-improving automations that run your go-to-market, help you find pull, and tighten your PMF.",
-      "version": "0.1.0",
-      "author": { "name": "Rob Snyder" },
+      "description": "A self-improving sales process: every call prepped and reviewed, every next step drafted, the process improved every week.",
+      "version": "0.2.0",
+      "author": {
+        "name": "Rob Snyder"
+      },
       "homepage": "https://github.com/RSSnyder13/autopull",
       "license": "MIT",
       "category": "productivity",
-      "keywords": ["gtm", "sales", "pmf", "founder", "pull"]
+      "keywords": [
+        "sales",
+        "sales-process",
+        "pmf",
+        "founder",
+        "pull"
+      ]
     }
   ]
 }

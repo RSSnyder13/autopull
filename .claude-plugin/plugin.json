@@ -1,8 +1,10 @@
 {
   "name": "autopull",
-  "version": "0.1.0",
-  "description": "Self-improving automations that run your go-to-market, help you find pull, and tighten your PMF. File everything in a GTM brain and call AI Rob for the judgment.",
-  "author": { "name": "Rob Snyder" },
+  "version": "0.2.0",
+  "description": "A self-improving sales process by Rob Snyder. Preps every sales call, reviews every call, drafts every next step, flags stuck deals, and improves your sales process every week. Calls AI Rob for the judgment.",
+  "author": {
+    "name": "Rob Snyder"
+  },
   "repository": "https://github.com/RSSnyder13/autopull",
   "license": "MIT",
   "skills": "./automations/"
